@@ -1,0 +1,25 @@
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    padding: 20px;
+    background: #fff;
+    color: #000;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.hero h2 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    font-weight: normal;
+    color: #555;
+}
