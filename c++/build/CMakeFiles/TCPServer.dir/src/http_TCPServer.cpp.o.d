@@ -1,7 +1,7 @@
 CMakeFiles/TCPServer.dir/src/http_TCPServer.cpp.o: \
  /home/moafk/Documents/IoTControl/c++/src/http_TCPServer.cpp \
  /usr/include/stdc-predef.h \
- /home/moafk/Documents/IoTControl/c++/src/../include/http_TCPServer.h \
+ /home/moafk/Documents/IoTControl/c++/include/http_TCPServer.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -180,5 +180,4 @@ CMakeFiles/TCPServer.dir/src/http_TCPServer.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/c++/13/cstring \
- /usr/include/string.h /usr/include/strings.h
+ /usr/include/linux/close_range.h
