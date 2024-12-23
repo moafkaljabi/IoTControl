@@ -1,11 +1,16 @@
 #include <iostream>
-#include "server.h" // Include the header file for the server
+#include <server.h>
 
-int main() {
-    std::cout << "Starting the server..." << std::endl;
+std::string ip = "0.0.0.0";
+int port = 8080;
 
-    // Call the function to start the server
-    startServer();
+using namespace tcp;
+
+int main(){
+
+    TCPServer server(ip,port);
+
+    server.start();
 
     return 0;
 }

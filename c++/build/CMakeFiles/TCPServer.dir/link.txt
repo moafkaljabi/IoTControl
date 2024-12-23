@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/TCPServer.dir/src/control.cpp.o CMakeFiles/TCPServer.dir/src/http_TCPServer.cpp.o CMakeFiles/TCPServer.dir/src/main.cpp.o CMakeFiles/TCPServer.dir/src/server.cpp.o -o TCPServer  -lpthread 

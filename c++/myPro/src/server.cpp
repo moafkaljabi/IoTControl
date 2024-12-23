@@ -14,6 +14,8 @@
 
 7- Close
 
+- concurrency  - Error Handling  - Protocol design - Security  - Data Handling
+
 */
 
 #include <sys/socket.h> // to use socket()
