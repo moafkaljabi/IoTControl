@@ -1,88 +1,64 @@
-#include "server.h"
+/*
+
+1- Create the socket.
+
+2- Define our address.
+
+3- Bind
+
+4- Listen
+
+5- Accept
+
+6- Recv
+
+7- Close
+
+- concurrency  - Error Handling  - Protocol design - Security  - Data Handling
+
+*/
+
+#include <sys/socket.h> // to use socket()
+#include <cstring>
 #include <iostream>
+#include <netinet/in.h>
 #include <unistd.h>
 
-namespace tcp 
+int main()
 {
-    TCPServer::TCPServer(std::string ip_address, int port) 
-        : m_ip_address(ip_address), m_port(port), 
-          m_socket(0), m_new_socket(0), 
-          m_socketAddress_len(sizeof(m_socketAddress))
-    {
-        m_socketAddress.sin_family = AF_INET;
-        m_socketAddress.sin_port = htons(m_port);
-        m_socketAddress.sin_addr.s_addr = inet_addr(m_ip_address.c_str());
-    }
 
-    TCPServer::~TCPServer()
-    {
-        closeServer();
-    }
+    // Create the socket, using socket()
+    int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 
-    int TCPServer::initializeSocket()
-    {
-        m_socket = socket(AF_INET, SOCK_STREAM, 0);
-        if (m_socket < 0) {
-            return -1;
-        }
+    // Define the address
+    sockaddr_in sockAddr;
 
-        if (bind(m_socket, (sockaddr *)&m_socketAddress, m_socketAddress_len) < 0) {
-            return -1;
-        }
+    sockAddr.sin_family = AF_INET;
+    sockAddr.sin_port = htons(8080);
+    sockAddr.sin_addr.s_addr = INADDR_ANY;
 
-        if (listen(m_socket, 1) < 0) {
-            return -1;
-        }
+    // Bind
+    bind(
+        serverSocket,
+        (struct sockaddr*)&sockAddr,
+        sizeof(sockAddr));
 
-        return 0;
-    }
+        // Listen 
+        listen(serverSocket,10);
 
-    void TCPServer::start()
-    {
-        if (initializeSocket() < 0) {
-            std::cerr << "Failed to start server" << std::endl;
-            return;
-        }
+        // Accept
+        int clientSocket = accept(serverSocket,nullptr,nullptr);
 
-        std::cout << "Server listening on " << m_ip_address << ":" << m_port << std::endl;
+        // Create buffer
+        char buffer [2048]= {0};
 
-        while (true) {
-            acceptConnection();
-            
-            if (receiveData()) {
-                // Process received data here
-                sendData("Received");  // Simple acknowledgment
-            }
-            
-            close(m_new_socket);
-        }
-    }
+        // Recieve
+        recv(clientSocket, buffer, sizeof(buffer),0);
 
-    void TCPServer::acceptConnection()
-    {
-        m_new_socket = accept(m_socket, (sockaddr *)&m_socketAddress, &m_socketAddress_len);
-    }
+        std::cout << "Message from the client: " << buffer << std::endl;
 
-    bool TCPServer::receiveData()
-    {
-        char buffer[1024] = {0};
-        int bytesReceived = read(m_new_socket, buffer, 1024);
-        
-        if (bytesReceived > 0) {
-            std::cout << "Received: " << buffer << std::endl;
-            return true;
-        }
-        return false;
-    }
+        // Close the connection
+        close(serverSocket);
 
-    bool TCPServer::sendData(const std::string& data)
-    {
-        return send(m_new_socket, data.c_str(), data.length(), 0) > 0;
-    }
-
-    void TCPServer::closeServer()
-    {
-        close(m_socket);
-        close(m_new_socket);
-    }
+    return 0;
 }
