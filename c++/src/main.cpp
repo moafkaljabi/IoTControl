@@ -1,16 +1,13 @@
-#include <iostream>
-#include <server.h>
+#include "TCPServer.h"
 
-std::string ip = "0.0.0.0";
-int port = 8080;
-
-using namespace tcp;
-
-int main(){
-
-    TCPServer server(ip,port);
-
-    server.start();
+int main() {
+    try {
+        TCPServer server(8080);
+        server.start();
+    } catch (const std::exception& ex) {
+        std::cerr << "Server error: " << ex.what() << std::endl;
+        return 1;
+    }
 
     return 0;
 }

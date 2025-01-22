@@ -23,81 +23,34 @@ gLock -
 
 */
 
-/*
+#include "TCPServer.h"
 
-create a vector for sockts ton/
-create a vector to manage the threads.
-
-accept() -> creates new thread with each new connection.
-
-close()  -> removed the thread of the connection. 
-
-int accept() {
-   try std::thread
-    if (accept()){
-    create new thread for the accepted client.
-    }
-
-}
-
-*/
-
-#include <iostream>
-#include <thread>
-#include <vector>
-#include <cstring>
-#include <netinet/in.h>
-#include <unistd.h>
-
-std::vector<int> clientSockets; // Store client sockets
-std::vector<std::thread> clientThreads; // Store client threads
-
-void handleClient(int clientSocket) {
-    char buffer[2048] = {0};
-    
-    while (true) {
-        ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
-        if (bytesReceived <= 0) {
-            std::cout << "Client disconnected or error occurred. Closing socket: " << clientSocket << std::endl;
-            close(clientSocket);
-            return;
-        }
-
-        std::cout << "Message from client (" << clientSocket << "): " << buffer << std::endl;
-        // Process the received message and send a response if needed
-        send(clientSocket, "Message received", strlen("Message received"), 0);
-    }
-}
-
-int main() {
-    // Create the socket
-    int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+TCPServer::TCPServer(int port) : port(port), serverSocket(-1) {
+    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket < 0) {
-        std::cerr << "Failed to create server socket!" << std::endl;
-        return 1;
+        throw std::runtime_error("Failed to create server socket!");
     }
 
-    // Define the address
-    sockaddr_in sockAddr;
     sockAddr.sin_family = AF_INET;
-    sockAddr.sin_port = htons(8080);
+    sockAddr.sin_port = htons(port);
     sockAddr.sin_addr.s_addr = INADDR_ANY;
 
-    // Bind
     if (bind(serverSocket, (struct sockaddr*)&sockAddr, sizeof(sockAddr)) < 0) {
-        std::cerr << "Failed to bind server socket!" << std::endl;
-        return 1;
+        throw std::runtime_error("Failed to bind server socket!");
     }
+}
 
-    // Listen
+TCPServer::~TCPServer() {
+    closeServer();
+}
+
+void TCPServer::start() {
     if (listen(serverSocket, 10) < 0) {
-        std::cerr << "Failed to listen on server socket!" << std::endl;
-        return 1;
+        throw std::runtime_error("Failed to listen on server socket!");
     }
 
-    std::cout << "Server is listening on port 8080..." << std::endl;
+    std::cout << "Server is listening on port " << port << " ..." << std::endl;
 
-    // Accept connections
     while (true) {
         sockaddr_in clientAddr;
         socklen_t clientAddrLen = sizeof(clientAddr);
@@ -109,25 +62,52 @@ int main() {
         }
 
         std::cout << "New client connected: " << clientSocket << std::endl;
-
-        // Add client socket to vector
         clientSockets.push_back(clientSocket);
+        clientThreads.emplace_back(&TCPServer::handleClient, this, clientSocket);
+    }
+}
 
-        // Create a thread to handle the client
-        clientThreads.emplace_back(std::thread(handleClient, clientSocket));
+void TCPServer::handleClient(int clientSocket) {
+    char buffer[2048] = {0};
+
+    while (true) {
+        ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
+        if (bytesReceived < 0) {
+            std::cerr << "Error receiving data from client socket: " << strerror(errno) << std::endl;
+            break;
+        } else if (bytesReceived == 0) {
+            std::cout << "Client disconnected: " << clientSocket << std::endl;
+            break;
+        }
+
+        std::cout << "Message from client (" << clientSocket << "): " << buffer << std::endl;
+
+        ssize_t bytesSent = send(clientSocket, "Message received", strlen("Message received"), 0);
+        if (bytesSent < 0) {
+            std::cerr << "Error sending data to client: " << strerror(errno) << std::endl;
+        } else {
+            std::cout << "Sent message: \"Message received\" (Bytes: " << bytesSent << ")" << std::endl;
+        }
     }
 
-    // Close server socket (unreachable in this design)
-    close(serverSocket);
+    close(clientSocket);
+}
 
-    // Join threads (also unreachable here unless you add a shutdown condition)
+void TCPServer::closeServer() {
+    for (int clientSocket : clientSockets) {
+        close(clientSocket);
+    }
+    clientSockets.clear();
+
     for (std::thread& t : clientThreads) {
         if (t.joinable()) {
             t.join();
         }
     }
 
-    return 0;
+    if (serverSocket >= 0) {
+        close(serverSocket);
+    }
 }
 
 
@@ -146,3 +126,7 @@ Threads are suitable for a moderate number of clients. For thousands of connecti
 
 
 */
+
+
+
+

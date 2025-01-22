@@ -1,22 +1,19 @@
-# Minimum version of CMake required
 cmake_minimum_required(VERSION 3.10)
 
-# Project name and version
-project(TCPServerProject VERSION 1.0)
+project(ServerApp)
 
-# Set C++ standard
+# Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Include directories
-include_directories(include)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-# Source files
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+# Add executable
+add_executable(server src/main.cpp src/server.cpp)
 
-# Add the executable
-add_executable(TCPServer ${SOURCES})
+# Optionally, you can specify additional flags like optimizations
+set_target_properties(server PROPERTIES 
+    CXX_FLAGS "-Wall -Wextra -O2")
 
-# Link any necessary libraries
-# If additional libraries are needed (e.g., pthread), link them here
-target_link_libraries(TCPServer pthread)
+# Optionally add a linker flag if necessary
+# target_link_libraries(server some_library)
