@@ -24,6 +24,7 @@ gLock -
 */
 
 #include "TCPServer.h"
+#include "sendJSON.cpp"
 
 TCPServer::TCPServer(int port) : port(port), serverSocket(-1) {
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -67,6 +68,7 @@ void TCPServer::start() {
     }
 }
 
+
 void TCPServer::handleClient(int clientSocket) {
     char buffer[2048] = {0};
 
@@ -82,16 +84,15 @@ void TCPServer::handleClient(int clientSocket) {
 
         std::cout << "Message from client (" << clientSocket << "): " << buffer << std::endl;
 
-        ssize_t bytesSent = send(clientSocket, "Message received", strlen("Message received"), 0);
-        if (bytesSent < 0) {
-            std::cerr << "Error sending data to client: " << strerror(errno) << std::endl;
-        } else {
-            std::cout << "Sent message: \"Message received\" (Bytes: " << bytesSent << ")" << std::endl;
-        }
+        // Send JSON response
+        sendJSON(clientSocket);
     }
 
     close(clientSocket);
 }
+
+
+
 
 void TCPServer::closeServer() {
     for (int clientSocket : clientSockets) {
