@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// JSONResponse defines the structure of the JSON object we expect from the server
 type JSONResponse struct {
 	Status   string `json:"status"`
 	Message  string `json:"message"`
@@ -33,7 +34,7 @@ func main() {
 	go func() {
 		serverReader := bufio.NewReader(conn)
 		for {
-			// Read server message , JSON
+			// Read server message (assuming JSON without a delimiter)
 			serverMessage, err := serverReader.ReadString('\n')
 			if err != nil {
 				fmt.Println("\nDisconnected from server.")
@@ -50,11 +51,10 @@ func main() {
 
 			// Print the parsed JSON data
 			fmt.Printf("\nServer JSON Response:\n")
-			fmt.Printf("	Status: %s\n", jsonResponse.Status)
-			fmt.Printf("	Message: %s\n", jsonResponse.Message)
-			fmt.Printf("	Client ID: %d\n", jsonResponse.ClientID)
+			fmt.Printf("  Status: %s\n", jsonResponse.Status)
+			fmt.Printf("  Message: %s\n", jsonResponse.Message)
+			fmt.Printf("  Client ID: %d\n", jsonResponse.ClientID)
 		}
-
 	}()
 
 	// Main loop to send messages to the server
