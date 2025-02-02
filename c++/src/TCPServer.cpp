@@ -24,7 +24,7 @@ gLock -
 */
 
 #include "TCPServer.h"
-#include "sendJSON.cpp"
+
 
 TCPServer::TCPServer(int port) : port(port), serverSocket(-1) {
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -69,31 +69,6 @@ void TCPServer::start() {
 }
 
 
-void TCPServer::handleClient(int clientSocket) {
-    char buffer[2048] = {0};
-
-    while (true) {
-        ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
-        if (bytesReceived < 0) {
-            std::cerr << "Error receiving data from client socket: " << strerror(errno) << std::endl;
-            break;
-        } else if (bytesReceived == 0) {
-            std::cout << "Client disconnected: " << clientSocket << std::endl;
-            break;
-        }
-
-        std::cout << "Message from client (" << clientSocket << "): " << buffer << std::endl;
-
-        // Send JSON response
-        sendJSON(clientSocket);
-    }
-
-    close(clientSocket);
-}
-
-
-
-
 void TCPServer::closeServer() {
     for (int clientSocket : clientSockets) {
         close(clientSocket);
@@ -114,11 +89,6 @@ void TCPServer::closeServer() {
 
 
 /*
-
-
-for error handling: 
-Check the return value of recv(). If recv() returns 0, it indicates that the client has closed the connection.
-Log whether the disconnection was intentional (e.g., recv() returning 0) or due to an error (e.g., recv() returning -1).
 
 
 Scaling Beyond Threads

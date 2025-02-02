@@ -1,9 +1,4 @@
-#include "rapidjson/document.h"
-#include "rapidjson/stringbuffer.h"
-#include "rapidjson/writer.h"
-#include <string>
-#include <iostream>
-#include <sys/socket.h> // For `send`
+#include "JSONSender.h"
 
 void sendJSON(int clientSocket) {
     // Create a JSON object
