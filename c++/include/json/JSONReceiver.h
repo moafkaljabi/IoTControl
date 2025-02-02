@@ -4,9 +4,6 @@ This class is responsible for receiving JSON and deserializing it into useful da
 
 */
 
-#ifndef JSONRECEIVER_H
-#define JSONRECEIVER_H
-
 #pragma once 
 
 #include "rapidjson/document.h"
@@ -25,6 +22,3 @@ public:
 private:
 
 };
-
-
-#endif

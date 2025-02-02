@@ -21,7 +21,7 @@ private:
     std::vector<int> clientSockets;
     std::vector<std::thread> clientThreads;
 
-    void handleClient(int clientSocket);
+  
     void closeServer();
 };
 

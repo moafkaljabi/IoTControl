@@ -6,9 +6,6 @@ This Class is responsible for serializing data into JSON and sending it.
 
 */
 
-#ifndef JSONSENDER_H
-#define JSONSENDER_H
-
 #pragma once 
 
 #include "rapidjson/document.h"
@@ -30,4 +27,3 @@ private:
 };
 
 
-#endif

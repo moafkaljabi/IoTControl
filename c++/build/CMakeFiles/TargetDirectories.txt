@@ -1,0 +1,3 @@
+/home/moafk/Documents/IoTControl/c++/build/CMakeFiles/server.dir
+/home/moafk/Documents/IoTControl/c++/build/CMakeFiles/edit_cache.dir
+/home/moafk/Documents/IoTControl/c++/build/CMakeFiles/rebuild_cache.dir

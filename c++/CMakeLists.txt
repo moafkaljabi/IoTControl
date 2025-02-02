@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Add executable
-add_executable(server src/main.cpp src/server.cpp)
+add_executable(server src/main.cpp src/TCPServer.cpp)
 
 # Optionally, you can specify additional flags like optimizations
 set_target_properties(server PROPERTIES 
