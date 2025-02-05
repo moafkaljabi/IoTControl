@@ -1,6 +1,4 @@
-#ifndef TCPSERVER_H
-#define TCPSERVER_H
-
+#pragma once
 #include <iostream>
 #include <thread>
 #include <vector>
@@ -8,7 +6,10 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-class TCPServer {
+#include "ClientHandler.h"
+
+class TCPServer 
+{
 public:
     TCPServer(int port);
     ~TCPServer();
@@ -18,11 +19,12 @@ private:
     int serverSocket;
     int port;
     sockaddr_in sockAddr;
-    std::vector<int> clientSockets;
-    std::vector<std::thread> clientThreads;
+    
+    std::vector<int> clientSockets;  // Tracks connected client sockets
+    std::vector<std::thread> clientThreads;  // Manages client handling threads
+    std::vector<std::unique_ptr<ClientHandler>> clientHandlers;  // Manages ClientHandler instances
+
 
   
     void closeServer();
 };
-
-#endif // TCPSERVER_H

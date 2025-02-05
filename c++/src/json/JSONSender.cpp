@@ -1,6 +1,12 @@
 #include "JSONSender.h"
 
-void sendJSON(int clientSocket) {
+
+// Constructor to initialize the client socket 
+JSONSender::JSONSender(int clientSocket) : clientSocket(clientSocket) {}
+
+
+void JSONSender::sendJSON()
+{
     // Create a JSON object
     rapidjson::Document jsonDoc;
     jsonDoc.SetObject();
@@ -24,9 +30,12 @@ void sendJSON(int clientSocket) {
 
     // Send the JSON string over the socket
     ssize_t bytesSent = send(clientSocket, jsonResponse.c_str(), jsonResponse.length(), 0);
-    if (bytesSent < 0) {
+    if (bytesSent < 0)
+    {
         std::cerr << "Error sending JSON: " << strerror(errno) << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Sent JSON: " << jsonResponse << " (Bytes: " << bytesSent << ")" << std::endl;
     }
 }

@@ -1,3 +1,4 @@
+/*
 #include "control.h"
 
 
@@ -53,3 +54,6 @@ void Control::blinkLED(int delayMs) {
         exit(1);
     }
 }
+
+
+*/

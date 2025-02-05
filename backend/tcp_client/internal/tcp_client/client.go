@@ -10,9 +10,12 @@ import (
 )
 
 type JSONResponse struct {
-	Status   string `json:"status"`
-	Message  string `json:"message"`
-	ClientID int    `json:"client_id"`
+	Status   string  `json:"status"`
+	Message  string  `json:"message"`
+	ClientID int     `json:"client_id"`
+	AccelX   float64 `json:"accelX"`
+	AccelY   float64 `json:"accelY"`
+	AccelZ   float64 `json:"accelZ"`
 }
 
 func main() {
@@ -33,7 +36,7 @@ func main() {
 	go func() {
 		serverReader := bufio.NewReader(conn)
 		for {
-			// Read server message , JSON
+			// Read server message, JSON
 			serverMessage, err := serverReader.ReadString('\n')
 			if err != nil {
 				fmt.Println("\nDisconnected from server.")
@@ -53,6 +56,9 @@ func main() {
 			fmt.Printf("	Status: %s\n", jsonResponse.Status)
 			fmt.Printf("	Message: %s\n", jsonResponse.Message)
 			fmt.Printf("	Client ID: %d\n", jsonResponse.ClientID)
+			fmt.Printf("	AccelX: %.2f\n", jsonResponse.AccelX)
+			fmt.Printf("	AccelY: %.2f\n", jsonResponse.AccelY)
+			fmt.Printf("	AccelZ: %.2f\n", jsonResponse.AccelZ)
 		}
 
 	}()

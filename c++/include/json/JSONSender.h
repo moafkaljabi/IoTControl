@@ -16,13 +16,16 @@ This Class is responsible for serializing data into JSON and sending it.
 #include <sys/socket.h> // For `send`
 
 
-class JSONSender{
-
+class JSONSender
+{
 public:
+    JSONSender(int clientSocket);
+
+    void sendJSON();
 
 
 private:
-
+    int clientSocket;
 
 };
 

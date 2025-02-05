@@ -69,19 +69,19 @@ include CMakeFiles/server.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/server.dir/flags.make
 
-CMakeFiles/server.dir/src/main.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/main.cpp.o: /home/moafk/Documents/IoTControl/c++/src/main.cpp
-CMakeFiles/server.dir/src/main.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/main.cpp.o -MF CMakeFiles/server.dir/src/main.cpp.o.d -o CMakeFiles/server.dir/src/main.cpp.o -c /home/moafk/Documents/IoTControl/c++/src/main.cpp
+CMakeFiles/server.dir/src/ClientHandler.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/ClientHandler.cpp.o: /home/moafk/Documents/IoTControl/c++/src/ClientHandler.cpp
+CMakeFiles/server.dir/src/ClientHandler.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/src/ClientHandler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/ClientHandler.cpp.o -MF CMakeFiles/server.dir/src/ClientHandler.cpp.o.d -o CMakeFiles/server.dir/src/ClientHandler.cpp.o -c /home/moafk/Documents/IoTControl/c++/src/ClientHandler.cpp
 
-CMakeFiles/server.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/moafk/Documents/IoTControl/c++/src/main.cpp > CMakeFiles/server.dir/src/main.cpp.i
+CMakeFiles/server.dir/src/ClientHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/ClientHandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/moafk/Documents/IoTControl/c++/src/ClientHandler.cpp > CMakeFiles/server.dir/src/ClientHandler.cpp.i
 
-CMakeFiles/server.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/main.cpp -o CMakeFiles/server.dir/src/main.cpp.s
+CMakeFiles/server.dir/src/ClientHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/ClientHandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/ClientHandler.cpp -o CMakeFiles/server.dir/src/ClientHandler.cpp.s
 
 CMakeFiles/server.dir/src/TCPServer.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/src/TCPServer.cpp.o: /home/moafk/Documents/IoTControl/c++/src/TCPServer.cpp
@@ -97,19 +97,115 @@ CMakeFiles/server.dir/src/TCPServer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/TCPServer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/TCPServer.cpp -o CMakeFiles/server.dir/src/TCPServer.cpp.s
 
+CMakeFiles/server.dir/src/control.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/control.cpp.o: /home/moafk/Documents/IoTControl/c++/src/control.cpp
+CMakeFiles/server.dir/src/control.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/src/control.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/control.cpp.o -MF CMakeFiles/server.dir/src/control.cpp.o.d -o CMakeFiles/server.dir/src/control.cpp.o -c /home/moafk/Documents/IoTControl/c++/src/control.cpp
+
+CMakeFiles/server.dir/src/control.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/control.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/moafk/Documents/IoTControl/c++/src/control.cpp > CMakeFiles/server.dir/src/control.cpp.i
+
+CMakeFiles/server.dir/src/control.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/control.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/control.cpp -o CMakeFiles/server.dir/src/control.cpp.s
+
+CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o: /home/moafk/Documents/IoTControl/c++/src/json/JSONReceiver.cpp
+CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o -MF CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o.d -o CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o -c /home/moafk/Documents/IoTControl/c++/src/json/JSONReceiver.cpp
+
+CMakeFiles/server.dir/src/json/JSONReceiver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/json/JSONReceiver.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/moafk/Documents/IoTControl/c++/src/json/JSONReceiver.cpp > CMakeFiles/server.dir/src/json/JSONReceiver.cpp.i
+
+CMakeFiles/server.dir/src/json/JSONReceiver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/json/JSONReceiver.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/json/JSONReceiver.cpp -o CMakeFiles/server.dir/src/json/JSONReceiver.cpp.s
+
+CMakeFiles/server.dir/src/json/JSONSender.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/json/JSONSender.cpp.o: /home/moafk/Documents/IoTControl/c++/src/json/JSONSender.cpp
+CMakeFiles/server.dir/src/json/JSONSender.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/server.dir/src/json/JSONSender.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/json/JSONSender.cpp.o -MF CMakeFiles/server.dir/src/json/JSONSender.cpp.o.d -o CMakeFiles/server.dir/src/json/JSONSender.cpp.o -c /home/moafk/Documents/IoTControl/c++/src/json/JSONSender.cpp
+
+CMakeFiles/server.dir/src/json/JSONSender.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/json/JSONSender.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/moafk/Documents/IoTControl/c++/src/json/JSONSender.cpp > CMakeFiles/server.dir/src/json/JSONSender.cpp.i
+
+CMakeFiles/server.dir/src/json/JSONSender.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/json/JSONSender.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/json/JSONSender.cpp -o CMakeFiles/server.dir/src/json/JSONSender.cpp.s
+
+CMakeFiles/server.dir/src/main.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/main.cpp.o: /home/moafk/Documents/IoTControl/c++/src/main.cpp
+CMakeFiles/server.dir/src/main.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/server.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/main.cpp.o -MF CMakeFiles/server.dir/src/main.cpp.o.d -o CMakeFiles/server.dir/src/main.cpp.o -c /home/moafk/Documents/IoTControl/c++/src/main.cpp
+
+CMakeFiles/server.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/moafk/Documents/IoTControl/c++/src/main.cpp > CMakeFiles/server.dir/src/main.cpp.i
+
+CMakeFiles/server.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/main.cpp -o CMakeFiles/server.dir/src/main.cpp.s
+
+CMakeFiles/server.dir/src/try.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/try.cpp.o: /home/moafk/Documents/IoTControl/c++/src/try.cpp
+CMakeFiles/server.dir/src/try.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/server.dir/src/try.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/try.cpp.o -MF CMakeFiles/server.dir/src/try.cpp.o.d -o CMakeFiles/server.dir/src/try.cpp.o -c /home/moafk/Documents/IoTControl/c++/src/try.cpp
+
+CMakeFiles/server.dir/src/try.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/try.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/moafk/Documents/IoTControl/c++/src/try.cpp > CMakeFiles/server.dir/src/try.cpp.i
+
+CMakeFiles/server.dir/src/try.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/try.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/try.cpp -o CMakeFiles/server.dir/src/try.cpp.s
+
+CMakeFiles/server.dir/src/utils.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/utils.cpp.o: /home/moafk/Documents/IoTControl/c++/src/utils.cpp
+CMakeFiles/server.dir/src/utils.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/server.dir/src/utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/utils.cpp.o -MF CMakeFiles/server.dir/src/utils.cpp.o.d -o CMakeFiles/server.dir/src/utils.cpp.o -c /home/moafk/Documents/IoTControl/c++/src/utils.cpp
+
+CMakeFiles/server.dir/src/utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/moafk/Documents/IoTControl/c++/src/utils.cpp > CMakeFiles/server.dir/src/utils.cpp.i
+
+CMakeFiles/server.dir/src/utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/moafk/Documents/IoTControl/c++/src/utils.cpp -o CMakeFiles/server.dir/src/utils.cpp.s
+
 # Object files for target server
 server_OBJECTS = \
+"CMakeFiles/server.dir/src/ClientHandler.cpp.o" \
+"CMakeFiles/server.dir/src/TCPServer.cpp.o" \
+"CMakeFiles/server.dir/src/control.cpp.o" \
+"CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o" \
+"CMakeFiles/server.dir/src/json/JSONSender.cpp.o" \
 "CMakeFiles/server.dir/src/main.cpp.o" \
-"CMakeFiles/server.dir/src/TCPServer.cpp.o"
+"CMakeFiles/server.dir/src/try.cpp.o" \
+"CMakeFiles/server.dir/src/utils.cpp.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
 
-server: CMakeFiles/server.dir/src/main.cpp.o
+server: CMakeFiles/server.dir/src/ClientHandler.cpp.o
 server: CMakeFiles/server.dir/src/TCPServer.cpp.o
+server: CMakeFiles/server.dir/src/control.cpp.o
+server: CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o
+server: CMakeFiles/server.dir/src/json/JSONSender.cpp.o
+server: CMakeFiles/server.dir/src/main.cpp.o
+server: CMakeFiles/server.dir/src/try.cpp.o
+server: CMakeFiles/server.dir/src/utils.cpp.o
 server: CMakeFiles/server.dir/build.make
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/moafk/Documents/IoTControl/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

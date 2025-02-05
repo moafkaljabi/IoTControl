@@ -6,12 +6,19 @@ project(ServerApp)
 set(CMAKE_CXX_STANDARD 17)
 
 # Include directories
-include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/include)  # Includes the 'include' directory for headers
+include_directories(${CMAKE_SOURCE_DIR}/include/json)  # Includes the 'include/json' directory
 
-# Add executable
-add_executable(server src/main.cpp src/TCPServer.cpp)
+# Find all source files in src and src/json directories
+file(GLOB SOURCES 
+    "src/*.cpp"                # All .cpp files in the 'src' directory
+    "src/json/*.cpp"           # All .cpp files in the 'src/json' directory
+)
 
-# Optionally, you can specify additional flags like optimizations
+# Add executable with all source files
+add_executable(server ${SOURCES})
+
+# Set compiler flags (warnings, optimizations)
 set_target_properties(server PROPERTIES 
     CXX_FLAGS "-Wall -Wextra -O2")
 

@@ -1,15 +1,19 @@
-#ifndef CLIENTHANDLER_H
-#define CLIENTHANDLER_H
+#pragma once
 
-#include "TCPServer.h"
+#include <iostream>
+#include <unistd.h>
+#include <vector>
+#include <thread>
 
-class ClientHandler {
+#include "json/JSONSender.h"  // Include correct path for JSONSender
 
+class ClientHandler 
+{
 public:
+    ClientHandler(int socket);  // Constructor to initialize jsonSender
+    void handleClient();  // Function to handle client communication
 
 private:
-
+    int clientSocket;
+    JSONSender jsonSender;  // JSONSender instance for sending responses
 };
-
-
-#endif

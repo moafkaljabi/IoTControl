@@ -1,7 +1,7 @@
-CMakeFiles/server.dir/src/main.cpp.o: \
- /home/moafk/Documents/IoTControl/c++/src/main.cpp \
+CMakeFiles/server.dir/src/ClientHandler.cpp.o: \
+ /home/moafk/Documents/IoTControl/c++/src/ClientHandler.cpp \
  /usr/include/stdc-predef.h \
- /home/moafk/Documents/IoTControl/c++/include/TCPServer.h \
+ /home/moafk/Documents/IoTControl/c++/include/ClientHandler.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -150,7 +150,18 @@ CMakeFiles/server.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/locale_facets.tcc \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/thread \
+ /usr/include/c++/13/bits/istream.tcc /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/c++/13/vector \
+ /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/stl_bvector.h \
+ /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/thread \
  /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/bits/unique_ptr.h \
  /usr/include/c++/13/bits/this_thread_sleep.h \
@@ -160,40 +171,11 @@ CMakeFiles/server.dir/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
  /usr/include/c++/13/limits /usr/include/c++/13/ctime \
- /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/vector \
- /usr/include/c++/13/bits/stl_uninitialized.h \
- /usr/include/c++/13/bits/stl_vector.h \
- /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/cstring \
- /usr/include/string.h /usr/include/strings.h /usr/include/netinet/in.h \
- /usr/include/x86_64-linux-gnu/sys/socket.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
- /usr/include/x86_64-linux-gnu/bits/socket.h \
- /usr/include/x86_64-linux-gnu/bits/socket_type.h \
- /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
- /usr/include/x86_64-linux-gnu/asm/socket.h \
- /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
- /usr/include/linux/stddef.h \
- /usr/include/x86_64-linux-gnu/asm/posix_types.h \
- /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
- /usr/include/asm-generic/posix_types.h \
- /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
- /usr/include/asm-generic/bitsperlong.h \
- /usr/include/x86_64-linux-gnu/asm/sockios.h \
- /usr/include/asm-generic/sockios.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
- /usr/include/x86_64-linux-gnu/bits/in.h /usr/include/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h \
- /home/moafk/Documents/IoTControl/c++/include/ClientHandler.h \
+ /usr/include/c++/13/bits/parse_numbers.h \
  /home/moafk/Documents/IoTControl/c++/include/json/JSONSender.h \
  /usr/include/rapidjson/document.h /usr/include/rapidjson/reader.h \
  /usr/include/rapidjson/allocators.h /usr/include/rapidjson/rapidjson.h \
+ /usr/include/c++/13/cstring /usr/include/string.h /usr/include/strings.h \
  /usr/include/inttypes.h /usr/include/c++/13/cassert \
  /usr/include/assert.h /usr/include/rapidjson/stream.h \
  /usr/include/rapidjson/encodings.h \
@@ -218,4 +200,22 @@ CMakeFiles/server.dir/src/main.cpp.o: \
  /usr/include/rapidjson/internal/dtoa.h \
  /usr/include/rapidjson/internal/itoa.h \
  /usr/include/rapidjson/internal/itoa.h \
- /usr/include/rapidjson/stringbuffer.h
+ /usr/include/rapidjson/stringbuffer.h \
+ /usr/include/x86_64-linux-gnu/sys/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
+ /usr/include/x86_64-linux-gnu/bits/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h \
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
+ /usr/include/x86_64-linux-gnu/asm/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h \
+ /usr/include/x86_64-linux-gnu/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
+ /home/moafk/Documents/IoTControl/c++/include/json/JSONReceiver.h \
+ /usr/include/rapidjson/prettywriter.h /usr/include/rapidjson/writer.h

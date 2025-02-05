@@ -129,6 +129,30 @@ server/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
 .PHONY : server/fast
 
+src/ClientHandler.o: src/ClientHandler.cpp.o
+.PHONY : src/ClientHandler.o
+
+# target to build an object file
+src/ClientHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ClientHandler.cpp.o
+.PHONY : src/ClientHandler.cpp.o
+
+src/ClientHandler.i: src/ClientHandler.cpp.i
+.PHONY : src/ClientHandler.i
+
+# target to preprocess a source file
+src/ClientHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ClientHandler.cpp.i
+.PHONY : src/ClientHandler.cpp.i
+
+src/ClientHandler.s: src/ClientHandler.cpp.s
+.PHONY : src/ClientHandler.s
+
+# target to generate assembly for a file
+src/ClientHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ClientHandler.cpp.s
+.PHONY : src/ClientHandler.cpp.s
+
 src/TCPServer.o: src/TCPServer.cpp.o
 .PHONY : src/TCPServer.o
 
@@ -152,6 +176,78 @@ src/TCPServer.s: src/TCPServer.cpp.s
 src/TCPServer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/TCPServer.cpp.s
 .PHONY : src/TCPServer.cpp.s
+
+src/control.o: src/control.cpp.o
+.PHONY : src/control.o
+
+# target to build an object file
+src/control.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/control.cpp.o
+.PHONY : src/control.cpp.o
+
+src/control.i: src/control.cpp.i
+.PHONY : src/control.i
+
+# target to preprocess a source file
+src/control.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/control.cpp.i
+.PHONY : src/control.cpp.i
+
+src/control.s: src/control.cpp.s
+.PHONY : src/control.s
+
+# target to generate assembly for a file
+src/control.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/control.cpp.s
+.PHONY : src/control.cpp.s
+
+src/json/JSONReceiver.o: src/json/JSONReceiver.cpp.o
+.PHONY : src/json/JSONReceiver.o
+
+# target to build an object file
+src/json/JSONReceiver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o
+.PHONY : src/json/JSONReceiver.cpp.o
+
+src/json/JSONReceiver.i: src/json/JSONReceiver.cpp.i
+.PHONY : src/json/JSONReceiver.i
+
+# target to preprocess a source file
+src/json/JSONReceiver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/json/JSONReceiver.cpp.i
+.PHONY : src/json/JSONReceiver.cpp.i
+
+src/json/JSONReceiver.s: src/json/JSONReceiver.cpp.s
+.PHONY : src/json/JSONReceiver.s
+
+# target to generate assembly for a file
+src/json/JSONReceiver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/json/JSONReceiver.cpp.s
+.PHONY : src/json/JSONReceiver.cpp.s
+
+src/json/JSONSender.o: src/json/JSONSender.cpp.o
+.PHONY : src/json/JSONSender.o
+
+# target to build an object file
+src/json/JSONSender.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/json/JSONSender.cpp.o
+.PHONY : src/json/JSONSender.cpp.o
+
+src/json/JSONSender.i: src/json/JSONSender.cpp.i
+.PHONY : src/json/JSONSender.i
+
+# target to preprocess a source file
+src/json/JSONSender.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/json/JSONSender.cpp.i
+.PHONY : src/json/JSONSender.cpp.i
+
+src/json/JSONSender.s: src/json/JSONSender.cpp.s
+.PHONY : src/json/JSONSender.s
+
+# target to generate assembly for a file
+src/json/JSONSender.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/json/JSONSender.cpp.s
+.PHONY : src/json/JSONSender.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -177,6 +273,54 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/try.o: src/try.cpp.o
+.PHONY : src/try.o
+
+# target to build an object file
+src/try.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/try.cpp.o
+.PHONY : src/try.cpp.o
+
+src/try.i: src/try.cpp.i
+.PHONY : src/try.i
+
+# target to preprocess a source file
+src/try.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/try.cpp.i
+.PHONY : src/try.cpp.i
+
+src/try.s: src/try.cpp.s
+.PHONY : src/try.s
+
+# target to generate assembly for a file
+src/try.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/try.cpp.s
+.PHONY : src/try.cpp.s
+
+src/utils.o: src/utils.cpp.o
+.PHONY : src/utils.o
+
+# target to build an object file
+src/utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/utils.cpp.o
+.PHONY : src/utils.cpp.o
+
+src/utils.i: src/utils.cpp.i
+.PHONY : src/utils.i
+
+# target to preprocess a source file
+src/utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/utils.cpp.i
+.PHONY : src/utils.cpp.i
+
+src/utils.s: src/utils.cpp.s
+.PHONY : src/utils.s
+
+# target to generate assembly for a file
+src/utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/utils.cpp.s
+.PHONY : src/utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +330,30 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... server"
+	@echo "... src/ClientHandler.o"
+	@echo "... src/ClientHandler.i"
+	@echo "... src/ClientHandler.s"
 	@echo "... src/TCPServer.o"
 	@echo "... src/TCPServer.i"
 	@echo "... src/TCPServer.s"
+	@echo "... src/control.o"
+	@echo "... src/control.i"
+	@echo "... src/control.s"
+	@echo "... src/json/JSONReceiver.o"
+	@echo "... src/json/JSONReceiver.i"
+	@echo "... src/json/JSONReceiver.s"
+	@echo "... src/json/JSONSender.o"
+	@echo "... src/json/JSONSender.i"
+	@echo "... src/json/JSONSender.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/try.o"
+	@echo "... src/try.i"
+	@echo "... src/try.s"
+	@echo "... src/utils.o"
+	@echo "... src/utils.i"
+	@echo "... src/utils.s"
 .PHONY : help
 
 
