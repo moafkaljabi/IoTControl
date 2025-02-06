@@ -24,9 +24,13 @@ public:
 
     void sendJSON();
 
+    std::string jsonResponse;
 
 private:
     std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket;
+
+    std::string clientAddress;
+    int clientPort;
 
 };
 

@@ -15,7 +15,9 @@ public:
     
     void handleClient();  
 
+
 private:
+    
     
     std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket;
 
@@ -23,5 +25,7 @@ private:
 
     JSONSender jsonSender;  // JSONSender instance for sending responses
 
+    std::string clientAddress;
+    int clientport; 
     
 };

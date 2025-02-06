@@ -3,9 +3,12 @@
 #include <cstring>
 #include <sys/socket.h>
 
-ClientHandler::ClientHandler(std::shared_ptr<boost::asio::ip::tcp::socket>socket) : clientSocket(socket), jsonSender(socket)
-{
-}
+ClientHandler::ClientHandler(std::shared_ptr<boost::asio::ip::tcp::socket>socket)
+:   clientSocket(socket), jsonSender(socket),
+    clientAddress (socket->remote_endpoint().address().to_string()),
+    clientport (socket->remote_endpoint().port()),
+    jsonSender (clientSocket, clientAddress, clientport)
+{}
 
 void ClientHandler::handleClient()
 {

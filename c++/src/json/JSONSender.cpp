@@ -2,45 +2,63 @@
 
 
 // Constructor to initialize the client socket 
-JSONSender::JSONSender(std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket) : clientSocket(clientSocket) {}
+JSONSender::JSONSender(std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket)
+:   clientSocket(clientSocket),
+    clientAddress (clientAddress),
+    clientPort (clientPort)
+{}
 
 
 void JSONSender::sendJSON()
 {
-    // Create a JSON object
-    rapidjson::Document jsonDoc;
-    jsonDoc.SetObject();
-    rapidjson::Document::AllocatorType& allocator = jsonDoc.GetAllocator();
 
-    // Add some data to the JSON
-    jsonDoc.AddMember("status", "success", allocator);
-    jsonDoc.AddMember("message", "Hello from the C++ server!", allocator);
-    jsonDoc.AddMember("client_id", clientSocket, allocator);
+    if(!clientSocket || clientSocket->is_open())
+    {
+        std::cerr << "Error" std::endl;
+        return;
+    }
 
-    // Serialize JSON to string
+    // Create JSON Object
+    rapidjson::Document JsonDocument;
+    document.SetObject();
+    rapidjson::Document::AllocatorType& allocator = JsonDocument.GetAllocator();
+
+    // Add data to the JSON object
+    JsonDocument.AddMember("status", rapidjson::Value("Success", allocator), allocator);
+    JsonDocument.AddMember("message", rapidjson::Value("Hello from the C++ server!", allocato), allocator);
+
+
+    // Get the client ip and port
+    JsonDocument.AddMember("client_ip", rapidjson::Value(clientAddress.c_str(),allocator), allocator);
+    JsonDocument.AddMember("client_port",clientPort,allocator);
+
+
+    // Serialize JSON to string .... stringBuffwer, writer, accept
     rapidjson::StringBuffer stringBuffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
-    jsonDoc.Accept(writer);
+    JsonDocument.Accept(writer);
 
-    // Get the serialized JSON string
-    std::string jsonResponse = stringBuffer.GetString();
+    // Get JSON
+    jsonResponse = stringBuffer.GetString();
+    jsonResponse += "\n"; // Delimeier
 
-    // Adding delimiter 
-    jsonResponse += "\n";
-
-    // Send the JSON string over the socket
-    ssize_t bytesSent = send(clientSocket, jsonResponse.c_str(), jsonResponse.length(), 0);
-    if (bytesSent < 0)
+    // Send
+    boost::asio::async_write(*clientSocket, boost::asio::buffer(jsonResponse),
+    [this] (const boost::system::error_code &ec, size_t bytesTransferred)
     {
-        std::cerr << "Error sending JSON: " << strerror(errno) << std::endl;
+        if()
+        {
+            std::cout << "Sent JSON (" << bytesTransferred << "bytes)" << std::endl; 
+        }
+        else 
+        {
+            std::cerr << "Error: " << ec.message() << std::endl;
+        }
     }
-    else
-    {
-        std::cout << "Sent JSON: " << jsonResponse << " (Bytes: " << bytesSent << ")" << std::endl;
-    }
+    );
+
+
 }
-
-
 
 
 
