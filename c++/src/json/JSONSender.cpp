@@ -2,7 +2,7 @@
 
 
 // Constructor to initialize the client socket 
-JSONSender::JSONSender(int clientSocket) : clientSocket(clientSocket) {}
+JSONSender::JSONSender(std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket) : clientSocket(clientSocket) {}
 
 
 void JSONSender::sendJSON()
@@ -39,3 +39,10 @@ void JSONSender::sendJSON()
         std::cout << "Sent JSON: " << jsonResponse << " (Bytes: " << bytesSent << ")" << std::endl;
     }
 }
+
+
+
+
+
+
+

@@ -15,17 +15,18 @@ This Class is responsible for serializing data into JSON and sending it.
 #include <iostream>
 #include <sys/socket.h> // For `send`
 
+#include <boost/asio.hpp>
 
 class JSONSender
 {
 public:
-    JSONSender(int clientSocket);
+    explicit JSONSender(std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket);
 
     void sendJSON();
 
 
 private:
-    int clientSocket;
+    std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket;
 
 };
 

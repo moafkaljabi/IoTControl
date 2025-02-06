@@ -3,36 +3,39 @@
 #include <cstring>
 #include <sys/socket.h>
 
-ClientHandler::ClientHandler(int socket) : clientSocket(socket), jsonSender(clientSocket) {}
+ClientHandler::ClientHandler(std::shared_ptr<boost::asio::ip::tcp::socket>socket) : clientSocket(socket), jsonSender(socket)
+{
+}
 
 void ClientHandler::handleClient()
 {
-    char buffer[2048] = {0};
+    auto buffer = std::make_shared<std::vector<char>>(2048);
 
-    while (true) 
+    boost::asio::async_read(*clientSocket, boost::asio::buffer(*buffer),
+    [this, buffer](const boost::system::error_code ec, size_t bytesTransferred)
     {
-        ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer) - 1, 0);
-        if (bytesReceived < 0) {
-            std::cerr << "Error receiving data: " << strerror(errno) << std::endl;
-            break;
-        } else if (bytesReceived == 0) {
-            std::cout << "Client disconnected: " << clientSocket << std::endl;
-            break;
+        if(!ec)
+        {
+            // Null terminate the received data
+            buffer->resize(bytesTransferred);
+
+            std::string jsonData(buffer->begin(), buffer->end());
+
+            // Log received msg
+            std::cout << "Received from client: " << jsonData<< std::endl;
+
+            // Call JSON to parse
+            JSONReceiver::parseJSON(jsonData);
+
+
+            // Send JSON response back
+            jsonSender.sendJSON();
         }
-
-        buffer[bytesReceived] = '\0'; // Null-terminate the received data
-        std::string jsonData(buffer);
-
-        // Log received message
-        std::cout << "Message from client (" << clientSocket << "): " << jsonData << std::endl;
-
-        // Call JSONReceiver to parse and pretty-print JSON
-        JSONReceiver::parseJSON(jsonData);
-        
-
-        // Send a response back to the client
-        jsonSender.sendJSON();  
+        else
+        {
+            std::cerr << "Error " << ec.message() << std::endl;
+        }
     }
-
-    close(clientSocket);
+    );
 }
+

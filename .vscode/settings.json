@@ -67,7 +67,17 @@
         "streambuf": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "any": "cpp",
+        "codecvt": "cpp",
+        "complex": "cpp",
+        "coroutine": "cpp",
+        "csignal": "cpp",
+        "list": "cpp",
+        "source_location": "cpp",
+        "future": "cpp",
+        "shared_mutex": "cpp",
+        "typeindex": "cpp"
     },
     "cmake.ignoreCMakeListsMissing": true
 }

@@ -23,97 +23,82 @@ gLock -
 
 */
 
-#include "TCPServer.h"
+#include <TCPServer.h>
 
 
-TCPServer::TCPServer(int port) : port(port), serverSocket(-1)
+TCPServer::TCPServer(int port) : acceptor(ioc, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(),port))
 {
-    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     
-    if (serverSocket < 0)
-    {
-        throw std::runtime_error("Failed to create server socket!");
-    }
-
-    sockAddr.sin_family = AF_INET;
-    sockAddr.sin_port = htons(port);
-    sockAddr.sin_addr.s_addr = INADDR_ANY;
-
-    if (bind(serverSocket, (struct sockaddr*)&sockAddr, sizeof(sockAddr)) < 0)
-    {
-        throw std::runtime_error("Failed to bind server socket!");
-    }
-}
-
-TCPServer::~TCPServer() 
-{
-    closeServer();
 }
 
 void TCPServer::start()
 {
-    if (listen(serverSocket, 10) < 0)
+    std::cout << "Server is listening..." << std::endl;
+
+    acceptConnection();
+
+    size_t numThreads = std::thread::hardware_concurrency();
+
+    for(size_t i=0; i<numThreads; ++i) 
     {
-        throw std::runtime_error("Failed to listen on server socket!");
+        threadPool.emplace_back([this]() {ioc.run();});
     }
 
-    std::cout << "Server is listening on port " << port << " ..." << std::endl;
-
-    while (true)
+    for( auto& thread : threadPool) 
     {
-        sockaddr_in clientAddr;
-        socklen_t clientAddrLen = sizeof(clientAddr);
-
-        int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, &clientAddrLen);
-        if (clientSocket < 0)
+        if(thread.joinable())
         {
-            std::cerr << "Failed to accept connection!" << std::endl;
-            continue;
+            thread.join();
         }
-
-        std::cout << "New client connected: " << clientSocket << std::endl;
-        clientSockets.push_back(clientSocket);
-
-        clientHandlers.emplace_back(std::make_unique<ClientHandler>(clientSocket));
-        clientThreads.emplace_back(&ClientHandler::handleClient, clientHandlers.back().get());
-
     }
 }
 
 
-void TCPServer::closeServer()
+void TCPServer::acceptConnection()
 {
-    for (int clientSocket : clientSockets)
-    {
-        close(clientSocket);
-    }
-    clientSockets.clear();
+    auto socket = std::make_shared<boost::asio::ip::tcp::socket> (ioc);
 
-    for (std::thread& t : clientThreads)
+    acceptor.async_accept(*socket, [this, socket](const boost::system::error_code& error)
     {
-        if (t.joinable()) {
-            t.join();
+        if(!error)
+        {
+            std::cout << "New client connected: " << socket->remote_endpoint() << std::endl;
+
+            // Buffer to read the incoming data
+            auto buffer = std::make_shared<std::vector<char>>(1024); 
+
+            // Handle the client asynchronously
+            boost::asio::async_read(
+                *socket, boost::asio::buffer(*buffer),
+                [this, socket, buffer](const boost::system::error_code& ec, size_t bytesTransferred)
+                {
+                    if(!ec) 
+                    {
+                        std::cout << "Received: " << bytesTransferred << " bytes" << std::endl;
+                        // Optionally process the data here or offload to another thread
+                    }
+                    else {
+                        std::cerr << "Error: " << ec.message() << std::endl;
+                    }
+                }
+            );
         }
-    }
 
-    if (serverSocket >= 0)
-    {
-        close(serverSocket);
-    }
+        // To accept the next client
+        acceptConnection();
+    });
 }
 
 
+void TCPServer::stop()
+{
+    ioc.stop();
 
-/*
-
-
-Scaling Beyond Threads
-
-Threads are suitable for a moderate number of clients. For thousands of connections, use asynchronous models (e.g., epoll or select) or frameworks like asio.
-
-
-*/
-
-
-
-
+    for(auto& thread : threadPool) 
+    {
+        if(thread.joinable())
+        {
+            thread.join();
+        }
+    }
+}

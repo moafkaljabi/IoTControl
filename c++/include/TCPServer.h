@@ -1,30 +1,26 @@
-#pragma once
+#pragma once 
+
+
 #include <iostream>
+#include <memory>
 #include <thread>
 #include <vector>
-#include <cstring>
-#include <netinet/in.h>
-#include <unistd.h>
 
-#include "ClientHandler.h"
+#include <boost/asio.hpp>
 
-class TCPServer 
-{
+
+class TCPServer {
+
 public:
+    
     TCPServer(int port);
-    ~TCPServer();
     void start();
+    void stop();
 
 private:
-    int serverSocket;
-    int port;
-    sockaddr_in sockAddr;
-    
-    std::vector<int> clientSockets;  // Tracks connected client sockets
-    std::vector<std::thread> clientThreads;  // Manages client handling threads
-    std::vector<std::unique_ptr<ClientHandler>> clientHandlers;  // Manages ClientHandler instances
 
-
-  
-    void closeServer();
+    void acceptConnection();
+    boost::asio::io_context ioc;
+    boost::asio::ip::tcp::acceptor acceptor;
+    std::vector<std::thread> threadPool;
 };
