@@ -20,7 +20,10 @@ This Class is responsible for serializing data into JSON and sending it.
 class JSONSender
 {
 public:
-    explicit JSONSender(std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket);
+    explicit JSONSender(
+        std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket,
+        const std::string& clientAddress,
+        int clientPort);
 
     void sendJSON();
 

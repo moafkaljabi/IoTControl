@@ -2,7 +2,11 @@
 
 
 // Constructor to initialize the client socket 
-JSONSender::JSONSender(std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket)
+JSONSender::JSONSender(
+    std::shared_ptr<boost::asio::ip::tcp::socket> clientSocket,
+    const std::string& clientAddress,
+    int clientPort
+)
 :   clientSocket(clientSocket),
     clientAddress (clientAddress),
     clientPort (clientPort)
@@ -14,18 +18,18 @@ void JSONSender::sendJSON()
 
     if(!clientSocket || clientSocket->is_open())
     {
-        std::cerr << "Error" std::endl;
+        std::cerr << "Error" << std::endl;
         return;
     }
 
     // Create JSON Object
     rapidjson::Document JsonDocument;
-    document.SetObject();
+    JsonDocument.SetObject();
     rapidjson::Document::AllocatorType& allocator = JsonDocument.GetAllocator();
 
     // Add data to the JSON object
     JsonDocument.AddMember("status", rapidjson::Value("Success", allocator), allocator);
-    JsonDocument.AddMember("message", rapidjson::Value("Hello from the C++ server!", allocato), allocator);
+    JsonDocument.AddMember("message", rapidjson::Value("Hello from the C++ server!", allocator), allocator);
 
 
     // Get the client ip and port
@@ -46,7 +50,7 @@ void JSONSender::sendJSON()
     boost::asio::async_write(*clientSocket, boost::asio::buffer(jsonResponse),
     [this] (const boost::system::error_code &ec, size_t bytesTransferred)
     {
-        if()
+        if(!ec)
         {
             std::cout << "Sent JSON (" << bytesTransferred << "bytes)" << std::endl; 
         }

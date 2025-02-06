@@ -4,10 +4,10 @@
 #include <sys/socket.h>
 
 ClientHandler::ClientHandler(std::shared_ptr<boost::asio::ip::tcp::socket>socket)
-:   clientSocket(socket), jsonSender(socket),
+:   clientSocket(socket),
     clientAddress (socket->remote_endpoint().address().to_string()),
-    clientport (socket->remote_endpoint().port()),
-    jsonSender (clientSocket, clientAddress, clientport)
+    clientPort (socket->remote_endpoint().port()),
+    jsonSender (socket, clientAddress, clientPort)
 {}
 
 void ClientHandler::handleClient()
@@ -36,7 +36,7 @@ void ClientHandler::handleClient()
         }
         else
         {
-            std::cerr << "Error " << ec.message() << std::endl;
+            std::cerr << "MSG: " << ec.message() << std::endl;
         }
     }
     );

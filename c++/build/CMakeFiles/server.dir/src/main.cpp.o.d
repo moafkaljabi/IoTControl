@@ -1,7 +1,7 @@
-CMakeFiles/server.dir/src/ClientHandler.cpp.o: \
- /home/moafk/Documents/IoTControl/c++/src/ClientHandler.cpp \
+CMakeFiles/server.dir/src/main.cpp.o: \
+ /home/moafk/Documents/IoTControl/c++/src/main.cpp \
  /usr/include/stdc-predef.h \
- /home/moafk/Documents/IoTControl/c++/include/ClientHandler.h \
+ /home/moafk/Documents/IoTControl/c++/include/TCPServer.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -150,9 +150,32 @@ CMakeFiles/server.dir/src/ClientHandler.cpp.o: \
  /usr/include/c++/13/bits/locale_facets.tcc \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/vector \
+ /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_uninitialized.h \
- /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/13/bits/align.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+ /usr/include/c++/13/bits/unique_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr_base.h \
+ /usr/include/c++/13/bits/allocated_ptr.h \
+ /usr/include/c++/13/ext/aligned_buffer.h \
+ /usr/include/c++/13/ext/concurrence.h \
+ /usr/include/c++/13/bits/shared_ptr_atomic.h \
+ /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/13/backward/auto_ptr.h \
+ /usr/include/c++/13/pstl/glue_memory_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/thread \
+ /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/cstdint /usr/include/c++/13/limits \
+ /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc /usr/include/boost/asio.hpp \
  /usr/include/boost/asio/any_completion_executor.hpp \
@@ -190,25 +213,8 @@ CMakeFiles/server.dir/src/ClientHandler.cpp.o: \
  /usr/include/boost/asio/execution/execute.hpp \
  /usr/include/boost/asio/execution/detail/as_invocable.hpp \
  /usr/include/boost/asio/detail/atomic_count.hpp \
- /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /usr/include/c++/13/bits/atomic_lockfree_defines.h \
- /usr/include/boost/asio/detail/memory.hpp /usr/include/c++/13/memory \
- /usr/include/c++/13/bits/stl_tempbuf.h \
- /usr/include/c++/13/bits/stl_raw_storage_iter.h \
- /usr/include/c++/13/bits/align.h /usr/include/c++/13/bits/unique_ptr.h \
- /usr/include/c++/13/bits/shared_ptr.h \
- /usr/include/c++/13/bits/shared_ptr_base.h \
- /usr/include/c++/13/bits/allocated_ptr.h \
- /usr/include/c++/13/ext/aligned_buffer.h \
- /usr/include/c++/13/ext/concurrence.h \
- /usr/include/c++/13/bits/shared_ptr_atomic.h \
- /usr/include/c++/13/backward/auto_ptr.h \
- /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h \
- /usr/include/boost/asio/detail/cstdint.hpp /usr/include/c++/13/cstdint \
+ /usr/include/c++/13/atomic /usr/include/boost/asio/detail/memory.hpp \
+ /usr/include/boost/asio/detail/cstdint.hpp \
  /usr/include/boost/asio/detail/throw_exception.hpp \
  /usr/include/boost/throw_exception.hpp \
  /usr/include/boost/exception/exception.hpp \
@@ -339,9 +345,6 @@ CMakeFiles/server.dir/src/ClientHandler.cpp.o: \
  /usr/include/boost/system/detail/error_category_impl.hpp \
  /usr/include/boost/system/detail/std_category_impl.hpp \
  /usr/include/boost/system/detail/mutex.hpp /usr/include/c++/13/mutex \
- /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
- /usr/include/c++/13/limits /usr/include/c++/13/ctime \
- /usr/include/c++/13/bits/parse_numbers.h \
  /usr/include/c++/13/bits/std_mutex.h \
  /usr/include/c++/13/bits/unique_lock.h \
  /usr/include/boost/system/error_condition.hpp \
@@ -1025,7 +1028,6 @@ CMakeFiles/server.dir/src/ClientHandler.cpp.o: \
  /usr/include/boost/asio/detail/future.hpp /usr/include/c++/13/future \
  /usr/include/c++/13/condition_variable \
  /usr/include/c++/13/bits/atomic_futex.h \
- /usr/include/c++/13/bits/std_thread.h \
  /usr/include/boost/asio/placeholders.hpp /usr/include/boost/bind/arg.hpp \
  /usr/include/boost/is_placeholder.hpp \
  /usr/include/boost/asio/posix/basic_descriptor.hpp \
@@ -1214,30 +1216,4 @@ CMakeFiles/server.dir/src/ClientHandler.cpp.o: \
  /usr/include/boost/asio/windows/stream_handle.hpp \
  /usr/include/boost/asio/writable_pipe.hpp \
  /usr/include/boost/asio/write_at.hpp \
- /usr/include/boost/asio/impl/write_at.hpp \
- /home/moafk/Documents/IoTControl/c++/include/json/JSONSender.h \
- /usr/include/rapidjson/document.h /usr/include/rapidjson/reader.h \
- /usr/include/rapidjson/allocators.h /usr/include/rapidjson/rapidjson.h \
- /usr/include/inttypes.h /usr/include/rapidjson/stream.h \
- /usr/include/rapidjson/encodings.h \
- /usr/include/rapidjson/encodedstream.h \
- /usr/include/rapidjson/memorystream.h \
- /usr/include/rapidjson/internal/meta.h \
- /usr/include/rapidjson/rapidjson.h \
- /usr/include/rapidjson/internal/stack.h \
- /usr/include/rapidjson/allocators.h \
- /usr/include/rapidjson/internal/swap.h \
- /usr/include/rapidjson/internal/strtod.h \
- /usr/include/rapidjson/internal/ieee754.h \
- /usr/include/rapidjson/internal/biginteger.h \
- /usr/include/rapidjson/internal/diyfp.h \
- /usr/include/rapidjson/internal/pow10.h \
- /usr/include/rapidjson/error/error.h /usr/include/rapidjson/rapidjson.h \
- /usr/include/rapidjson/internal/strfunc.h \
- /usr/include/rapidjson/stream.h /usr/include/rapidjson/stringbuffer.h \
- /usr/include/rapidjson/writer.h /usr/include/rapidjson/internal/dtoa.h \
- /usr/include/rapidjson/internal/itoa.h \
- /usr/include/rapidjson/internal/itoa.h \
- /usr/include/rapidjson/stringbuffer.h \
- /home/moafk/Documents/IoTControl/c++/include/json/JSONReceiver.h \
- /usr/include/rapidjson/prettywriter.h /usr/include/rapidjson/writer.h
+ /usr/include/boost/asio/impl/write_at.hpp
