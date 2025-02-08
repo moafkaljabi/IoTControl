@@ -8,6 +8,8 @@
 
 #include <boost/asio.hpp>
 
+#include "ClientHandler.h"
+
 
 class TCPServer {
 
@@ -23,4 +25,5 @@ private:
     boost::asio::io_context ioc;
     boost::asio::ip::tcp::acceptor acceptor;
     std::vector<std::thread> threadPool;
+    ClientHandler clientHandler;
 };
