@@ -14,7 +14,7 @@ void JSONReceiver::parseJSON(const std::string& jsonData)
         return;
     }
 
-    // Use PrettyWriter to format JSON output
+    // Using PrettyWriter to format JSON output
     rapidjson::StringBuffer buffer;
     rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
     doc.Accept(writer);
