@@ -4,7 +4,8 @@
 #include <vector>
 #include <boost/asio.hpp>
 #include "json/JSONSender.h"
-//#include <memory>
+
+// allows the object to safely create a std::shared_ptr to itself. for any async function.
 class ClientHandler : public std::enable_shared_from_this<ClientHandler>
 {
 public:

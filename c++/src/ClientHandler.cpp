@@ -55,3 +55,18 @@ void ClientHandler::handleClient()
         }
     });
 }
+
+
+
+
+/*
+
+
+            Feature	Why                                                                       It's Used
+std::enable_shared_from_this<ClientHandler>	                    Ensures ClientHandler can create a shared_ptr to itself.
+shared_from_this()	                                            Prevents ClientHandler from being destroyed while an async operation is pending.
+async_read_until(*clientSocket, *buffer, '\n', handler)	        Reads a full message until '\n' instead of fixed bytes.
+Capturing self in the lambda (self = shared_from_this())	    Keeps ClientHandler alive until the async operation completes.
+
+
+*/
