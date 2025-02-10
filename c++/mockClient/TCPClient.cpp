@@ -33,7 +33,7 @@ int main()
 
     if (connect(sockFD, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0 ) 
     {
-        std::cerr << "Error " << std::endl;
+        std::cerr << "Error from mockClient connect() " << std::endl;
         close(sockFD);
         return 1;
     }
@@ -66,6 +66,28 @@ int main()
         std::cout << "Sent JSON:" << jsonData << std::endl;
         // Close the socket
         // close(sockFD);
+
+
+
+
+
+        char recvBuffer[1024] = {0};  
+
+        ssize_t bytesReceived = recv(sockFD, recvBuffer, sizeof(recvBuffer) - 1, 0);
+        if (bytesReceived > 0)
+        {
+            recvBuffer[bytesReceived] = '\0';
+            std::cout << "Received from server: " << recvBuffer << std::endl;
+        }
+        else if (bytesReceived == 0)
+        {
+            std::cout << "Server closed the connection." << std::endl;
+            break;
+        }
+        else
+        {
+            std::cerr << "Error receiving data from server" << std::endl;
+        }
 
         std::this_thread::sleep_for(std::chrono::seconds(2));
     }

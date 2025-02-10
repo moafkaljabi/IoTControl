@@ -16,11 +16,12 @@ JSONSender::JSONSender(
 void JSONSender::sendJSON()
 {
 
-    if(!clientSocket || clientSocket->is_open())
+    if (!clientSocket || !clientSocket->is_open()) 
     {
-        std::cerr << "Error" << std::endl;
+        std::cerr << "Error from sendJSON: Invalid or closed socket" << std::endl;
         return;
     }
+
 
     // Create JSON Object
     rapidjson::Document JsonDocument;
@@ -46,6 +47,13 @@ void JSONSender::sendJSON()
     jsonResponse = stringBuffer.GetString();
     jsonResponse += "\n"; // Delimeier
 
+
+    if (!clientSocket || !clientSocket->is_open())
+    {
+    std::cerr << "Socket closed before writing JSON!" << std::endl;
+    return;
+    }
+
     // Send
     boost::asio::async_write(*clientSocket, boost::asio::buffer(jsonResponse),
     [this] (const boost::system::error_code &ec, size_t bytesTransferred)
@@ -56,7 +64,7 @@ void JSONSender::sendJSON()
         }
         else 
         {
-            std::cerr << "Error: " << ec.message() << std::endl;
+            std::cerr << "Error from JSONSender: " << ec.message() << std::endl;
         }
     }
     );

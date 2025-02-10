@@ -1,5 +1,5 @@
 #include "ClientHandler.h"
-#include "json/JSONReceiver.h" // Include JSONReceiver
+#include "json/JSONReceiver.h"
 #include <cstring>
 #include <sys/socket.h>
 
@@ -7,15 +7,17 @@ ClientHandler::ClientHandler(std::shared_ptr<boost::asio::ip::tcp::socket>socket
 :   clientSocket(socket),
     clientAddress (socket->remote_endpoint().address().to_string()),
     clientPort (socket->remote_endpoint().port()),
-    jsonSender (socket, clientAddress, clientPort)
+    buffer(std::make_shared<std::vector<char>>(1024)),
+    jsonSender (std::make_shared<JSONSender>(socket, clientAddress, clientPort))
 {}
+
 
 void ClientHandler::handleClient()
 {
     auto buffer = std::make_shared<boost::asio::streambuf>();
 
     boost::asio::async_read_until(*clientSocket, *buffer, '\n',
-    [this, buffer](const boost::system::error_code& ec, size_t bytesTransferred)
+    [this, self = shared_from_this(), buffer](const boost::system::error_code& ec, size_t bytesTransferred)
     {
         if (!ec)
         {
@@ -27,11 +29,29 @@ void ClientHandler::handleClient()
 
             JSONReceiver::parseJSON(jsonData);
 
-            jsonSender.sendJSON();
+            if (jsonSender)
+            {
+                jsonSender->sendJSON(); // Ensure jsonSender is valid
+            }
+            else
+            {
+                std::cerr << "Error: jsonSender is null!" << std::endl;
+            }
+
+  
+            if (clientSocket->is_open())
+            {
+                handleClient();
+            }
+            else
+            {
+                std::cerr << "Client socket closed, stopping read loop." << std::endl;
+            }
         }
         else
         {
             std::cerr << "Error reading data: " << ec.message() << std::endl;
+            clientSocket->close();
         }
     });
 }

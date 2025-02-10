@@ -4,8 +4,8 @@
 #include <vector>
 #include <boost/asio.hpp>
 #include "json/JSONSender.h"
-
-class ClientHandler 
+//#include <memory>
+class ClientHandler : public std::enable_shared_from_this<ClientHandler>
 {
 public:
     ClientHandler(std::shared_ptr<boost::asio::ip::tcp::socket> socket);
@@ -16,5 +16,5 @@ private:
     std::string clientAddress;  // Declare before jsonSender
     int clientPort;             // Declare before jsonSender
     std::shared_ptr<std::vector<char>> buffer;
-    JSONSender jsonSender;      // Now correctly placed after clientAddress and clientPort
+    std::shared_ptr<JSONSender> jsonSender;
 };
