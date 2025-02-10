@@ -1,5 +1,5 @@
-CMakeFiles/server.dir/src/TCPServer.cpp.o: \
- /home/moafk/Documents/IoTControl/c++/src/TCPServer.cpp \
+CMakeFiles/server.dir/src/main.cpp.o: \
+ /home/moafk/Documents/IoTControl/c++/src/main.cpp \
  /usr/include/stdc-predef.h \
  /home/moafk/Documents/IoTControl/c++/include/TCPServer.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \

@@ -59,6 +59,8 @@ int main()
         data.Accept(writer);
         std::string jsonData = buffer.GetString();
 
+        jsonData += "\n";
+
         // Send to server
         send(sockFD, jsonData.c_str(), jsonData.size(),0);
         std::cout << "Sent JSON:" << jsonData << std::endl;

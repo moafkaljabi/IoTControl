@@ -64,26 +64,11 @@ void TCPServer::acceptConnection()
         {
             std::cout << "New client connected: " << socket->remote_endpoint() << std::endl;
 
-            clientHandler.handleClient();
+            // clientHandler.emplace(socket);
+            // clientHandler->handleClient();
 
-            // // Buffer to read the incoming data
-            // auto buffer = std::make_shared<std::vector<char>>(1024); 
-
-            // // Handle the client asynchronously
-            // boost::asio::async_read(
-            //     *socket, boost::asio::buffer(*buffer),
-            //     [this, socket, buffer](const boost::system::error_code& ec, size_t bytesTransferred)
-            //     {
-            //         if(!ec) 
-            //         {
-            //             std::cout << "Received: " << bytesTransferred << " bytes" << std::endl;
-            //             // Optionally process the data here or offload to another thread
-            //         }
-            //         else {
-            //             std::cerr << "Error: " << ec.message() << std::endl;
-            //         }
-            //     }
-            // );
+            auto clientHandler = std::make_shared<ClientHandler>(socket);
+            clientHandler->handleClient();
         }
 
         // To accept the next client
