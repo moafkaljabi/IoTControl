@@ -1,6 +1,13 @@
 # IoT Backend
 
-This project implements a backend for IoT devices using C++.
+ IoT Backend implements a backend for IoT/Embedded devices using C++.and Golang.
+
+ C++ is used for the TCP server.
+ Golang is used for:
+ - TCP client.
+ - http server.
+ - Database Communication; PostgresSQL.
+ - JWT Authentication
 
 ## Installation
 
