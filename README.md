@@ -9,10 +9,3 @@
  - Database Communication; PostgresSQL.
  - JWT Authentication
 
-## Installation
-
-Instructions to install the project.
-
-## Usage
-
-Instructions on how to use the project.
