@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AccountComponent } from './account/account.component'; // ✅ Import the standalone component
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true, // ✅ Mark AppComponent as standalone
+  imports: [RouterOutlet, AccountComponent], // ✅ Use AccountComponent
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'IoTControl';
-}
+export class AppComponent {}

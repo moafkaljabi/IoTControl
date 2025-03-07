@@ -9,15 +9,13 @@ import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    AccountComponent  // Add AccountComponent here
   ],
   imports: [
+    AppComponent, 
     BrowserModule,
     CommonModule,
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule {}

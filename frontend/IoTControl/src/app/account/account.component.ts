@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrl: './account.component.css'
+  styleUrls: ['./account.component.css']
 })
-
 export class AccountComponent {
-  accounts: any[] = [];
+  accounts: any[] = []; // ✅ Define accounts as an array
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {} // ✅ Inject HttpClient
 
-  ngOnInit(); void {}
-
-  getAccounts(): void {
-    this.http.get<any[]>('http://localhost:8080/Account').subscribe(data => this.accounts = data, error => console.error(error));
-
+  getAccounts() {
+    this.http.get<any[]>('http://localhost:8080/Account/1') // ✅ Replace with your actual API URL
+      .subscribe(response => {
+        this.accounts = response; // ✅ Store API response in accounts
+      }, error => {
+        console.error('Error fetching accounts', error);
+      });
   }
 }
