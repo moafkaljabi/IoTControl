@@ -1,10 +1,23 @@
-import { RouterModule } from '@angular/router';
-import { routes } from './app.routes';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { AccountComponent } from './account/account.component'; // Import your component
+import { routes } from './app.routes';
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  declarations: [
+    AppComponent, 
+    AccountComponent  // Add AccountComponent here
+  ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
-
