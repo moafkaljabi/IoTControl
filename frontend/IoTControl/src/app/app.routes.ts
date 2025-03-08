@@ -8,7 +8,9 @@ export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'account', component: AccountComponent }
+  { path: 'account', component: AccountComponent },
+  { path: 'account/:id', component: AccountComponent } 
+
 
   // Other routes can go here
 ];
