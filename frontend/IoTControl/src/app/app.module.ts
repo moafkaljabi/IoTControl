@@ -1,23 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';  
-import { AppComponent } from './app.component';
-import { AccountComponent } from './account/account.component';
-import { CommonModule } from '@angular/common'; 
-
-import { routes } from './app.routes'; 
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';  // Ensure HttpClientModule is included
+import { routes } from './app.routes';  // Import the routing configuration
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AccountComponent
+    // Do not declare AppComponent or AccountComponent here
   ],
   imports: [
     BrowserModule,
-    CommonModule, 
-    RouterModule.forRoot(routes)  
+    HttpClientModule,  // Ensure HttpClientModule is imported
+    RouterModule.forRoot(routes)  // Configure routing for the app
   ],
   providers: [],
-  bootstrap: [AppComponent] 
+  bootstrap: []  // No need to bootstrap here
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,10 +1,7 @@
-<!-- <button (click)="getAccounts()">Get Accounts</button>
+<!-- account.component.html -->
+<h1>Account Page</h1>
+<p>Displaying accounts data...</p>
 <ul>
-  <li *ngFor="let account of accounts">
-    {{ account.id }} - {{ account.name }}
-  </li>
-</ul> -->
-
-
-<h2>Account Page</h2>
-<button (click)="testClick()">Click me</button>
+  <li *ngFor="let account of accounts">{{ account.name }}</li>
+</ul>
+<button (click)="testClick()">Click Me</button>
