@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';  // Ensure CommonModule is imported for *ngFor functionality
+import { CommonModule } from '@angular/common'; // Needed for *ngFor
 
 @Component({
   selector: 'app-account',
-  standalone: true,  // This is required for Angular 17+ standalone components
-  imports: [CommonModule],  // Import CommonModule for *ngFor functionality
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  styleUrls: ['./account.component.css'],
+  standalone: true, 
+  imports: [CommonModule] // Necessary for *ngFor
 })
 export class AccountComponent implements OnInit {
   accounts: any[] = [];
@@ -15,7 +15,7 @@ export class AccountComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.getAccounts();  // Call the API to fetch account data
+    this.getAccounts();
   }
 
   getAccounts() {
@@ -30,7 +30,7 @@ export class AccountComponent implements OnInit {
         }
       });
   }
-
+  
   testClick() {
     alert('Button clicked!');
   }
