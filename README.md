@@ -17,8 +17,8 @@
 ## Build
 
 Using CMake:
-cmake .. 
-make 
+- cmake ..
+- make 
 
 ## Run 
-./server
+- ./server
