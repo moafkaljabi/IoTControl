@@ -69,5 +69,6 @@
         "typeinfo": "cpp",
         "variant": "cpp"
     },
-    "cmake.ignoreCMakeListsMissing": true
+    "cmake.ignoreCMakeListsMissing": true,
+    "postman.settings.dotenv-detection-notification-visibility": false
 }
