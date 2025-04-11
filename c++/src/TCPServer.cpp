@@ -104,16 +104,6 @@ void TCPServer::closeServer()
 
 
 
-/*
-
-
-Scaling Beyond Threads
-
-Threads are suitable for a moderate number of clients. For thousands of connections, use asynchronous models (e.g., epoll or select) or frameworks like asio.
-
-
-*/
-
 
 
 

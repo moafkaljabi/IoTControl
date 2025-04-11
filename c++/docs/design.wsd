@@ -1,0 +1,63 @@
+@startuml IoTControlDesgin  
+
+' TRANSPORT LAYER
+class TCPServer {
+  +start()
+  +stop()
+}
+class ClientHandler {
+  +handleClient()
+}
+class MQTTClient {
+  +connect()
+  +publish()
+}
+class MQTTServer {
+  +start()
+  +handleMessage()
+}
+TCPServer --> ClientHandler
+
+' PROTOCOL LAYER
+class JSONReceiver {
+  +parseMessage(msg: string): SensorData
+}
+class JSONSender {
+  +serialize(data: SensorData): string
+}
+
+ClientHandler --> JSONReceiver
+ClientHandler --> JSONSender
+MQTTClient --> JSONReceiver
+MQTTClient --> JSONSender
+
+' CORE MODELS
+class SensorData {
+  -timestamp: string
+  -sensorType: string
+  -value: float
+}
+class Command {
+  -commandType: string
+  -targetDevice: string
+}
+JSONReceiver --> SensorData
+JSONSender --> SensorData
+
+' LOGIC LAYER
+class DataLogger {
+  +readFromUART(): SensorData
+}
+class MockClient {
+  +simulateSensorData()
+}
+class DeviceManager {
+  +registerDevice()
+  +getStatus()
+}
+DataLogger --> SensorData
+MockClient --> SensorData
+DeviceManager --> SensorData
+DeviceManager --> Command
+
+@enduml

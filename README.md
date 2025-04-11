@@ -1,6 +1,6 @@
 # IoT Backend
 
-This project implements a backend for IoT devices using C++.
+This project implements a backend for IoT devices using C++.        
 
 ## Installation
 
