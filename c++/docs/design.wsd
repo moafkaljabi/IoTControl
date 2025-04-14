@@ -1,60 +1,87 @@
-@startuml IoTControlDesgin  
+@startuml IoTDesign
+skinparam classAttributeIconSize 0
 
-' TRANSPORT LAYER
-class TCPServer {
-  +start()
-  +stop()
-}
-class ClientHandler {
-  +handleClient()
-}
-class MQTTClient {
-  +connect()
-  +publish()
-}
-class MQTTServer {
-  +start()
-  +handleMessage()
-}
-TCPServer --> ClientHandler
+package "Transport Layer" {
+    class TCPServer {
+        +start()
+        +stop()
+    }
 
-' PROTOCOL LAYER
-class JSONReceiver {
-  +parseMessage(msg: string): SensorData
-}
-class JSONSender {
-  +serialize(data: SensorData): string
+    class ClientHandler {
+        +handleClient()
+    }
+
+    class MQTTClient {
+        +connect()
+        +publish()
+        +subscribe()
+    }
+
+    class MQTTServer {
+        +start()
+        +handleMessage()
+    }
+
+    TCPServer "1" *-- "*" ClientHandler
 }
 
+package "Protocol Layer" {
+    class JSONReceiver {
+        +parseMessage(string): SensorData
+    }
+
+    class JSONSender {
+        +serialize(SensorData): string
+    }
+}
+
+package "Application Logic" {
+    class DataLogger {
+        +readFromUART(): SensorData
+        +logData()
+    }
+
+    class MockClient {
+        +simulateSensorData()
+    }
+
+    class DeviceManager {
+        +registerDevice()
+        +getStatus()
+    }
+}
+
+package "Core Models" {
+    class SensorData {
+        -timestamp: string
+        -sensorType: string
+        -value: float
+    }
+
+    class Command {
+        -commandType: string
+        -targetDevice: string
+    }
+}
+
+package "Interfaces" {
+    interface IMessageTransport {
+        +send(message: string)
+        +receive(): string
+    }
+
+    interface IDataConsumer {
+        +consume(SensorData)
+    }
+}
+
+TCPServer ..|> IMessageTransport
+MQTTClient ..|> IMessageTransport
 ClientHandler --> JSONReceiver
 ClientHandler --> JSONSender
 MQTTClient --> JSONReceiver
 MQTTClient --> JSONSender
-
-' CORE MODELS
-class SensorData {
-  -timestamp: string
-  -sensorType: string
-  -value: float
-}
-class Command {
-  -commandType: string
-  -targetDevice: string
-}
 JSONReceiver --> SensorData
-JSONSender --> SensorData
-
-' LOGIC LAYER
-class DataLogger {
-  +readFromUART(): SensorData
-}
-class MockClient {
-  +simulateSensorData()
-}
-class DeviceManager {
-  +registerDevice()
-  +getStatus()
-}
 DataLogger --> SensorData
 MockClient --> SensorData
 DeviceManager --> SensorData

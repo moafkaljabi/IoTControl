@@ -1,0 +1,3 @@
+@startuml IoTDesgin
+Alice -> Bob: Hello
+@enduml

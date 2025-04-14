@@ -1,0 +1,11 @@
+@startuml IoTControlDesign
+
+class TCPServer {
+
+}
+
+class ClientHandler {
+    
+}
+
+@enduml
