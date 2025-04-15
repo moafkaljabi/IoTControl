@@ -1,25 +1,10 @@
 /*
 
-1- Create the socket.
+2025
 
-2- Define our address.
+TCP Server 
 
-3- Bind
-
-4- Listen
-
-5- Accept
-
-6- Recv
-
-7- Close
-
-- concurrency
-
-gLock - 
-
-
-- Error Handling  - Protocol design - Security  - Data Handling
+Responsible for implemnting the methods in the socket.h API
 
 */
 

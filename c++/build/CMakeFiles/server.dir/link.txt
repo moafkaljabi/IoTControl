@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/server.dir/src/ClientHandler.cpp.o CMakeFiles/server.dir/src/TCPServer.cpp.o CMakeFiles/server.dir/src/control.cpp.o CMakeFiles/server.dir/src/json/JSONReceiver.cpp.o CMakeFiles/server.dir/src/json/JSONSender.cpp.o CMakeFiles/server.dir/src/main.cpp.o CMakeFiles/server.dir/src/try.cpp.o CMakeFiles/server.dir/src/utils.cpp.o -o server 
