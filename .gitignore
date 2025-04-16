@@ -1,3 +1,4 @@
 /build/
 c++/.notes.txt
 c++/build/
+c++/tests/proto.cpp
