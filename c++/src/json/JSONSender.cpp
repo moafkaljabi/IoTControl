@@ -1,3 +1,23 @@
+/*
+
+2025
+
+
+- Builds and sends outgoing JSON.
+
+- Uses RapidJSON.
+
+- Sends through a socket passed at construction.
+
+
+
+
+
+*/
+
+
+
+
 #include "JSONSender.h"
 
 

@@ -6,6 +6,13 @@ TCP Server
 
 Responsible for implemnting the methods in the socket.h API
 
+
+- Listens for incoming client connections from devices.
+- Spawns a new ClientHandler for each new connection.
+
+should be modular, so it can be replaced/work along a Http server, WebSockets and etc.
+
+
 */
 
 #include "TCPServer.h"

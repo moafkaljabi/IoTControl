@@ -1,3 +1,20 @@
+/*
+
+2025
+
+
+- Manages connection to MQTT broker.
+
+- Owns the mqtt::async_client object.
+
+- Singleton or shared resource.
+
+
+*/
+
+
+
+
 #include "../../include/Mqtt/MqqtClient.h"
 
 

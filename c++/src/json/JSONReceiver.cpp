@@ -1,3 +1,21 @@
+/*
+
+2025
+
+- Responsible for parsing and validating incoming JSON.
+
+- Could include schema validation in the future.
+
+- Can be reused in MQTT flows too.  
+
+
+
+
+*/
+
+
+
+
 
 #include "JSONReceiver.h"
 
