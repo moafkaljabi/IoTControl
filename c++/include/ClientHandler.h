@@ -15,7 +15,7 @@ class ClientHandler
 {
 public:
    
-    ClientHandler(int socket, std::shared_ptr<MQTTPublisher> mqttPublisher);  // Constructor to initialize jsonSender
+    ClientHandler(int socket);  // Constructor to initialize jsonSender
     void handleClient();  // Function to handle client communication
 
 private:
@@ -23,6 +23,5 @@ private:
 int clientSocket;
     JSONSender jsonSender;  // JSONSender instance for sending responses
 
-    std::shared_ptr<MQTTPublisher> mqttPublisher;
 
 };

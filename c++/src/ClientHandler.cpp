@@ -26,8 +26,6 @@
 #include <cstring>
 #include <sys/socket.h>
 
-#include "mqtt/MQTTPublisher.h"
-
 
 ClientHandler::ClientHandler(int socket) : clientSocket(socket), jsonSender(clientSocket) {}
 
