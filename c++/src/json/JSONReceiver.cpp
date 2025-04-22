@@ -25,7 +25,7 @@ bool JSONReceiver::parseJSON(const std::string& jsonData, rapidjson::Document& d
 
     if (docOut.Parse(jsonData.c_str()).HasParseError())
     {
-        std::cerr << "Failed to parse JSON from client: " << rapidjson::GetParseError_En(docOut.GetParseError()) << std::endl;
+        std::cerr << "Failed to parse JSON from client: " << rapidjson::GetParseErrorFunc(docOut.GetParseError()) << std::endl;
         return false;
     }
     return true;

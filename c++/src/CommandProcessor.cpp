@@ -16,7 +16,7 @@ CommandProcessor::CommandProcessor(){}
 std::string CommandProcessor::processCommand(const rapidjson::Document& jsonDoc)
 {
     // Check if the command is proper
-    if(!jsonDoc.HasMember("command") || !jsonDoc.IsString())
+    if (!jsonDoc.HasMember("command") || !jsonDoc["command"].IsString())
     {
         return "Invalid commanf format...";
     }
@@ -29,6 +29,8 @@ std::string CommandProcessor::processCommand(const rapidjson::Document& jsonDoc)
             return handlTurnLED();
         case CommandType::GET_STATUS:
             return handleStatusRequest();
+        case CommandType::DISCONNECT:
+            return handleDisconnect();
         default:
             return "Unknown command " + command;
     }
@@ -46,6 +48,11 @@ CommandProcessor::CommandType CommandProcessor::getCommandType(const std::string
         return CommandType::GET_STATUS;
     }
 
+    else if (command == "disconnect")
+    {
+        return CommandType::DISCONNECT;
+    }
+
     else return CommandType::UNKNOWN;
 }
 
@@ -59,4 +66,10 @@ std::string CommandProcessor::handleStatusRequest()
 {
     std::cout << "[Command] Getting the status\n"; 
     return "Status: \n";
+}
+
+std::string CommandProcessor::handleDisconnect()
+{
+    std::cout << "[Command] Disconnect requested\n";
+    return "Disconnected, Goodbey";
 }

@@ -54,18 +54,25 @@ void ClientHandler::handleClient()
         std::cout << "Message from client (" << clientSocket << "): " << jsonData << std::endl;
 
         // Parse Json and process it 
-        rapidjson::Document document;
-        if(jsonReceiver.parseJSON(&jsonData,document))
+        rapidjson::Document doc;
+        if (jsonReceiver.parseJSON(jsonData, doc)) 
         {
-            std::string response = commandProcessor.processCommand(document);
-            jsonSender.sendJSON(response);
-        }
-        
-        else
+            std::string response = commandProcessor.processCommand(doc);
+
+            // Check for disconnect command
+            if (doc.HasMember("command") && doc["command"].IsString() &&
+                std::string(doc["command"].GetString()) == "disconnect") {
+                jsonSender.sendResponse("Disconnected. Goodbye!");
+                break;
+            }
+
+            jsonSender.sendResponse(response);
+        } 
+        else 
         {
-            // Send a response back to the client
-            jsonSender.sendJSON(R"({"Error": "Invalid JSON format"})");  
+            jsonSender.sendError("Invalid JSON format");
         }
+
     }
 
     close(clientSocket);

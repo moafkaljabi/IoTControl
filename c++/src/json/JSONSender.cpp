@@ -9,9 +9,8 @@
 
 - Sends through a socket passed at construction.
 
-
-
 */
+
 
 
 
@@ -23,37 +22,78 @@
 JSONSender::JSONSender(int clientSocket) : clientSocket(clientSocket) {}
 
 
-void JSONSender::sendJSON()
+void JSONSender::sendHello()
 {
-    // Create a JSON object
-    rapidjson::Document jsonDoc;
-    jsonDoc.SetObject();
-    rapidjson::Document::AllocatorType& allocator = jsonDoc.GetAllocator();
+    rapidjson::Document document;
 
-    // Add some data to the JSON
-    jsonDoc.AddMember("status", "success", allocator);
-    jsonDoc.AddMember("message", "Hello from the C++ server!", allocator);
-    jsonDoc.AddMember("client_id", clientSocket, allocator);
+    document.SetObject();
 
-    // Serialize JSON to string
-    rapidjson::StringBuffer stringBuffer;
-    rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
-    jsonDoc.Accept(writer);
+    auto& allocator = document.GetAllocator();
 
-    // Get the serialized JSON string
-    std::string jsonResponse = stringBuffer.GetString();
+    document.AddMember("status", "success", allocator);
+    document.AddMember("message", "Welcome to the C++ server", allocator);
 
-    // Adding delimiter 
-    jsonResponse += "\n";
+    sendJSON(document);
+}
 
-    // Send the JSON string over the socket
-    ssize_t bytesSent = send(clientSocket, jsonResponse.c_str(), jsonResponse.length(), 0);
-    if (bytesSent < 0)
+
+
+void JSONSender::sendResponse(const std::string& response)
+{
+    rapidjson::Document document;
+    document.SetObject();
+
+    auto& allocator = document.GetAllocator();
+
+    document.AddMember("status", "success", allocator);
+    document.AddMember("message",rapidjson::Value(response.c_str(),allocator), allocator);
+
+    sendJSON(document);
+}
+
+
+void JSONSender::sendError(const std::string& error)
+{
+    rapidjson::Document document;
+    document.SetObject();
+
+    auto& allocator = document.GetAllocator();
+
+    document.AddMember("status", "Error", allocator);
+    document.AddMember("message", rapidjson::Value(error.c_str(), allocator), allocator);
+
+    sendJSON(document);
+}
+
+
+void JSONSender::sendJSON(const rapidjson::Document& document)
+{
+    // Buffer
+    rapidjson::StringBuffer buffer;
+
+    // Writer 
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+
+    // Accept 
+    document.Accept(writer);
+
+    // String 
+    std::string jsonString = buffer.GetString();
+    jsonString += "\n";
+
+    
+    // BytesSent 
+    ssize_t bytesSent = send(clientSocket, jsonString.c_str(), jsonString.length(), 0);
+
+    // Check if successfully sent
+    if(bytesSent < 0)
     {
+        // Do NOT use "sendError" here cause it uses this "sendJSON" we are in
         std::cerr << "Error sending JSON: " << strerror(errno) << std::endl;
     }
     else
     {
-        std::cout << "Sent JSON: " << jsonResponse << " (Bytes: " << bytesSent << ")" << std::endl;
+        std::cout << "Sent JSON: " << jsonString << "(Bytes: " << bytesSent << ")" << std::endl;
     }
+
 }

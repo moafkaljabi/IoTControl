@@ -19,13 +19,18 @@ This Class is responsible for serializing data into JSON and sending it.
 class JSONSender
 {
 public:
-    JSONSender(int clientSocket);
+    explicit JSONSender(int clientSocket);
 
-    void sendJSON();
+    void sendHello();
+    void sendResponse(const std::string& response); // Costum Response
+    void sendError(const std::string& error);
 
 
 private:
     int clientSocket;
+
+private:
+    void sendJSON(const rapidjson::Document& document);
 
 };
 
