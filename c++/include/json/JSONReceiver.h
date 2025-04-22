@@ -22,7 +22,7 @@ class JSONReceiver
 {
 
 public:
-    static void parseJSON(const std::string& jsonData);
+    bool parseJSON(const std::string& jsonData, rapidjson::Document& docOutput);
 
 
 private:

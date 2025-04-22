@@ -23,17 +23,32 @@ This class is to process commands after receiving them from the JSONReceiver cla
 
 #pragma once 
 
+#include <string>
+#include "rapidjson/document.h"
+
 
 class CommandProcessor {
 
 public:
-
+    
     CommandProcessor();
-    ~CommandProcessor();
- 
+
+    std::string processCommand(const rapidjson::Document& jsonDoc);
+
 
 private:
 
+    enum class CommandType{
+        TURN_LED,
+        GET_STATUS,
+        UNKNOWN
+    };
+
+    CommandType getCommandType(const std::string& command);
+
+    // Command handlers
+    std::string handlTurnLED();
+    std::string handleStatusRequest();
 
 
 };

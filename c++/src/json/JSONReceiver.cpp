@@ -15,27 +15,18 @@
 
 
 
-
-
 #include "JSONReceiver.h"
 
 
 
-void JSONReceiver::parseJSON(const std::string& jsonData) 
+bool JSONReceiver::parseJSON(const std::string& jsonData, rapidjson::Document& docOut) 
 {
     
-    rapidjson::Document doc;
 
-    if (doc.Parse(jsonData.c_str()).HasParseError())
+    if (docOut.Parse(jsonData.c_str()).HasParseError())
     {
-        std::cerr << "Failed to parse JSON from client: " << doc.GetParseError() << std::endl;
-        return;
+        std::cerr << "Failed to parse JSON from client: " << rapidjson::GetParseError_En(docOut.GetParseError()) << std::endl;
+        return false;
     }
-
-    // Use PrettyWriter to format JSON output
-    rapidjson::StringBuffer buffer;
-    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
-    doc.Accept(writer);
-
-    std::cout << "Received JSON (Pretty-Printed):\n" << buffer.GetString() << std::endl;
+    return true;
 }
