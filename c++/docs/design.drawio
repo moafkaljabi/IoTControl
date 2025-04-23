@@ -135,8 +135,8 @@
         <mxCell id="eP-PhU0bK2_ZU1GFkmd_-33" value="Layer | Protocol | Use Case&#xa;C++ → Java | MQTT | Commands, events, telemetry&#xa;C++ → Java | WebSocket | Real-time streaming&#xa;Java → Frontend | WebSocket/HTTP | UI updates, dashboards, control&#xa;Java → AWS | HTTP/MQTT | Sync with cloud, database writes" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-778" y="-57" width="405" height="94" as="geometry" />
         </mxCell>
-        <mxCell id="KRjrecf9lK6g-uxXFmfX-35" value="TCP-Server=C++" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1215" y="-329" width="111" height="26" as="geometry" />
+        <mxCell id="KRjrecf9lK6g-uxXFmfX-35" value="TCP-Server - C++" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1175" y="-292" width="115" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
