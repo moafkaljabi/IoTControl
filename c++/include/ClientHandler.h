@@ -8,7 +8,6 @@
 #include "json/JSONSender.h"
 #include "Mqtt/MQTTPublisher.h"
 
-class MQTTPublisher;
 
 
 class ClientHandler 

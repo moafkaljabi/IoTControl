@@ -56,6 +56,6 @@ private:
 
     std::string handleDisconnect();
     
-
+    MQTTPublisher& mqttPublisher;
 
 };

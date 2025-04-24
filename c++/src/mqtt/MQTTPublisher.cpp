@@ -54,6 +54,13 @@ void MQTTPublisher::publish(const std::string& topic, const std::string& payload
 }
 
 
+
+void MQTTPublisher::publishDefault(const std::string& payload)
+{
+    publish(topic, payload);
+}
+
+
 MQTTPublisher::~MQTTPublisher()
 {
     try {

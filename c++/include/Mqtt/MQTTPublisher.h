@@ -25,6 +25,7 @@ public:
     );
     
     void publish(const std::string& topic , const std::string& payload);
+    void publishDefault(const std::string& payload);
 
 
     ~MQTTPublisher();

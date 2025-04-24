@@ -12,7 +12,8 @@
 #include "CommandProcessor.h"
 #include "MQTTPublisher.h"
 
-CommandProcessor::CommandProcessor(){}
+CommandProcessor::CommandProcessor(MQTTPublisher& mqttPublisher)
+    : mqttPublisher(mqttPublisher) {}
 
 std::string CommandProcessor::processCommand(const rapidjson::Document& jsonDoc)
 {

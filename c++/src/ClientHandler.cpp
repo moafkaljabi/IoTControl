@@ -36,7 +36,7 @@ void ClientHandler::handleClient()
     char buffer[2048] = {0};
 
     JSONReceiver jsonReceiver;
-    CommandProcessor commandProcessor(MQTTPublisher& mqttPublisher); // Pass MQTTPublisher instance
+    CommandProcessor commandProcessor(mqttPublisher); // Pass MQTTPublisher instance
 
     while (true) 
     {
