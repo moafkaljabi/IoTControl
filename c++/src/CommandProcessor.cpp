@@ -10,6 +10,7 @@
 
 
 #include "CommandProcessor.h"
+#include "MQTTPublisher.h"
 
 CommandProcessor::CommandProcessor(){}
 
@@ -59,6 +60,9 @@ CommandProcessor::CommandType CommandProcessor::getCommandType(const std::string
 std::string CommandProcessor::handlTurnLED()
 {
     std::cout << "[Command] Turning LED on/off\n";
+    mqttPublisher.publish("device/led", R"({"status":"LED toggled"})");
+
+
     return "LED toggled\n";
 }
 

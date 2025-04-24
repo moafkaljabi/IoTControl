@@ -26,7 +26,12 @@ mqtt/MQTTPublisher.cpp
 
 
 
-MQTTPublisher::MQTTPublisher(const std::string& address, const std::string& clientId, const std::string& topic)
+MQTTPublisher::MQTTPublisher
+(
+    const std::string& address, 
+    const std::string& clientId, 
+    const std::string& topic
+)
     : topic(topic), client(address, clientId), connOpts() 
 {
     connOpts.set_clean_session(true);
@@ -38,12 +43,23 @@ MQTTPublisher::MQTTPublisher(const std::string& address, const std::string& clie
     }
 }
 
-void MQTTPublisher::publish(const std::string& payload)
+void MQTTPublisher::publish(const std::string& topic, const std::string& payload)
 {
     try {
         client.publish(topic, payload.c_str(), payload.length(), 1, false);
         std::cout << "[MQTT] Published to topic '" << topic << "': " << payload << std::endl;
     } catch (const mqtt::exception& e) {
         std::cerr << "[MQTT] Publish failed: " << e.what() << std::endl;
+    }
+}
+
+
+MQTTPublisher::~MQTTPublisher()
+{
+    try {
+        client.disconnect();
+    }
+    catch (...) {
+        std::cerr << "[MQTT] Error during disconnect\n";
     }
 }

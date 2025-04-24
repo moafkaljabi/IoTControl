@@ -8,11 +8,13 @@ set(CMAKE_CXX_STANDARD 23)
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)  # Includes the 'include' directory for headers
 include_directories(${CMAKE_SOURCE_DIR}/include/json)  # Includes the 'include/json' directory
+include_directories(${CMAKE_SOURCE_DIR}/include/Mqtt)
 
 # Find all source files in src and src/json directories
 file(GLOB SOURCES 
     "src/*.cpp"                # All .cpp files in the 'src' directory
     "src/json/*.cpp"           # All .cpp files in the 'src/json' directory
+    "src/mqtt/*.cpp"
 )
 
 # Add executable with all source files

@@ -27,14 +27,16 @@
 
 
 
-ClientHandler::ClientHandler(int socket) : clientSocket(socket), jsonSender(clientSocket) {}
+ClientHandler::ClientHandler(int socket, MQTTPublisher& mqttPub) 
+    : clientSocket(socket), jsonSender(clientSocket), mqttPublisher(mqttPub) 
+    {}
 
 void ClientHandler::handleClient()
 {
     char buffer[2048] = {0};
 
     JSONReceiver jsonReceiver;
-    CommandProcessor commandProcessor;
+    CommandProcessor commandProcessor(MQTTPublisher& mqttPublisher); // Pass MQTTPublisher instance
 
     while (true) 
     {

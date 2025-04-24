@@ -15,13 +15,15 @@ class ClientHandler
 {
 public:
    
-    ClientHandler(int socket);  // Constructor to initialize jsonSender
-    void handleClient();  // Function to handle client communication
+    ClientHandler(int socket, MQTTPublisher& mqttPublisher );
+    void handleClient();  
 
 private:
     
 int clientSocket;
-    JSONSender jsonSender;  // JSONSender instance for sending responses
+JSONSender jsonSender;  // JSONSender instance for sending responses
+
+MQTTPublisher& mqttPublisher;
 
 
 };

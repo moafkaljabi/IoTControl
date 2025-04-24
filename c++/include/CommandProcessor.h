@@ -22,17 +22,20 @@ This class is to process commands after receiving them from the JSONReceiver cla
 
 
 #pragma once 
+
 #include <iostream>
 #include <string>
 #include "rapidjson/document.h"
 
 
+
+class MQTTPublisher;
+
 class CommandProcessor {
 
 public:
     
-    CommandProcessor();
-
+    CommandProcessor(MQTTPublisher& mqttPublisher);
     std::string processCommand(const rapidjson::Document& jsonDoc);
 
 
