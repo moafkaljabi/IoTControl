@@ -13,6 +13,7 @@ IClientDataProcessor.h
 #pragma once 
 
 #include <string>
+#include "rapidjson/document.h"
 
 
 class IClientDataProcessor {
@@ -20,9 +21,8 @@ class IClientDataProcessor {
 public:
 
 
-    ~IClientDataProcessor() = default;
+    virtual ~IClientDataProcessor() = default;
 
-    virtual std::string process(const std::string rawData) = 0;
-
+    virtual std::string processCommand(rapidjson::Document& jsonData) = 0;
 
 };

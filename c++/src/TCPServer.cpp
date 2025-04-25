@@ -37,10 +37,14 @@ TCPServer::TCPServer(int port) : port(port), serverSocket(-1)
     }
 }
 
+
+
 TCPServer::~TCPServer() 
 {
     closeServer();
 }
+
+
 
 void TCPServer::start()
 {

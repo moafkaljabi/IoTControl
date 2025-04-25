@@ -6,7 +6,7 @@
 #include <thread>
 
 #include "json/JSONSender.h"
-#include "Mqtt/MQTTPublisher.h"
+#include "IClientDataProcessor.h"
 
 
 
@@ -14,7 +14,7 @@ class ClientHandler
 {
 public:
    
-    ClientHandler(int socket, MQTTPublisher& mqttPublisher );
+    ClientHandler(int socket, IClientDataProcessor& iClientDataProcessor);
     void handleClient();  
 
 private:
@@ -22,7 +22,6 @@ private:
 int clientSocket;
 JSONSender jsonSender;  // JSONSender instance for sending responses
 
-MQTTPublisher& mqttPublisher;
-
+IClientDataProcessor& iClientDataProcessor;
 
 };
