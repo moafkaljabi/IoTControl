@@ -16,6 +16,9 @@ should be modular, so it can be replaced/work along a Http server, WebSockets an
 */
 
 #include "TCPServer.h"
+#include "MQTTPublisher.h"
+#include "CommandProcessor.h"
+#include "CommandProcessorAdapter.h"
 
 
 TCPServer::TCPServer(int port) : port(port), serverSocket(-1)
@@ -55,6 +58,13 @@ void TCPServer::start()
 
     std::cout << "Server is listening on port " << port << " ..." << std::endl;
 
+
+
+    MQTTPublisher mqttPublisher("tcp://broker", "clientId", "topic");
+    CommandProcessor commandProcessor(mqttPublisher);
+    CommandProcessAdapter commandProcessorAdapter(commandProcessor);
+
+
     while (true)
     {
         sockaddr_in clientAddr;
@@ -70,7 +80,7 @@ void TCPServer::start()
         std::cout << "New client connected: " << clientSocket << std::endl;
         clientSockets.push_back(clientSocket);
 
-        clientHandlers.emplace_back(std::make_unique<ClientHandler>(clientSocket));
+        clientHandlers.emplace_back(std::make_unique<ClientHandler>(clientSocket, commandProcessorAdapter));
         clientThreads.emplace_back(&ClientHandler::handleClient, clientHandlers.back().get());
 
     }
@@ -97,9 +107,4 @@ void TCPServer::closeServer()
         close(serverSocket);
     }
 }
-
-
-
-
-
 
