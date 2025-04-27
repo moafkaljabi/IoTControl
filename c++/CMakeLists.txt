@@ -23,6 +23,3 @@ add_executable(server ${SOURCES})
 # Set compiler flags (warnings, optimizations)
 set_target_properties(server PROPERTIES 
     CXX_FLAGS "-Wall -Wextra -O2")
-
-# Optionally add a linker flag if necessary
-# target_link_libraries(server some_library)

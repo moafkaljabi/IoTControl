@@ -12,12 +12,9 @@ CommandProcessAdapter.h
 
 #pragma once 
 
+#include <rapidjson/document.h>
 #include "CommandProcessor.h"
 #include "IClientDataProcessor.h"
-
-#include "rapidjson/document.h"
-
-
 
 
 
@@ -25,7 +22,8 @@ class CommandProcessAdapter : public IClientDataProcessor {
 
 public:
 
-    CommandProcessorAdapter(CommandProcessor& processor) : processor(processor){}
+    CommandProcessAdapter(CommandProcessor& processor)
+        : processor(processor) {}
 
     std::string processCommand (const rapidjson::Document& jsonData) override {
         
@@ -37,8 +35,5 @@ private:
     CommandProcessor& processor;
 
 };
-
-
-
 
 

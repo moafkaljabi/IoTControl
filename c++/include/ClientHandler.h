@@ -4,8 +4,10 @@
 #include <unistd.h>
 #include <vector>
 #include <thread>
+#include <cstring>
+#include <sys/socket.h>
+#include <rapidjson/document.h>
 
-#include "json/JSONSender.h"
 #include "IClientDataProcessor.h"
 
 
@@ -13,15 +15,13 @@
 class ClientHandler 
 {
 public:
-   
-    ClientHandler(int socket, IClientDataProcessor& iClientDataProcessor);
+
+    ClientHandler(int socket, IClientDataProcessor& processor);
     void handleClient();  
 
 private:
     
 int clientSocket;
-JSONSender jsonSender;  // JSONSender instance for sending responses
-
-IClientDataProcessor& iClientDataProcessor;
+IClientDataProcessor& clientDataProcessor;
 
 };

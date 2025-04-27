@@ -36,7 +36,8 @@ class CommandProcessor {
 public:
     
     CommandProcessor(MQTTPublisher& mqttPublisher);
-    std::string processCommand(const rapidjson::Document& jsonDoc);
+//     std::string processCommand(const rapidjson::Document& jsonDoc);
+       virtual void processCommand(const rapidjson::Document& jsonDoc);
 
 
 private:

@@ -4,13 +4,12 @@
 
 */
 
-#pragma once 
+#pragma once
 
 #include "IClientDataProcessorFactory.h"
 #include "CommandProcessor.h"
 
-
-class CommandProcessorAdapterFactory : public IClientDataProcessorFactory 
+class CommandProcessorAdapterFactory : public IClientDataProcessorFactory
 {
 public:
     CommandProcessorAdapterFactory(CommandProcessor& commandProcessor);
