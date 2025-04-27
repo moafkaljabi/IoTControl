@@ -16,12 +16,10 @@ should be modular, so it can be replaced/work along a Http server, WebSockets an
 */
 
 #include "TCPServer.h"
-#include "MQTTPublisher.h"
-#include "CommandProcessor.h"
-#include "CommandProcessorAdapter.h"
 
 
-TCPServer::TCPServer(int port) : port(port), serverSocket(-1)
+TCPServer::TCPServer(int port, IClientDataProcessorFactory& iClientDataProcessorFactory) 
+    : port(port), iClientDataProcessorFactory(iClientDataProcessorFactory), running(false), serverSocket(-1)
 {
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     
@@ -55,34 +53,42 @@ void TCPServer::start()
     {
         throw std::runtime_error("Failed to listen on server socket!");
     }
-
+    
+    running = true;
     std::cout << "Server is listening on port " << port << " ..." << std::endl;
 
+    acceptClients();
+}
+
+void TCPServer::stop()
+{
+    running = false;
+    closeServer();
+}
 
 
-    MQTTPublisher mqttPublisher("tcp://broker", "clientId", "topic");
-    CommandProcessor commandProcessor(mqttPublisher);
-    CommandProcessAdapter commandProcessorAdapter(commandProcessor);
-
-
-    while (true)
+void TCPServer::acceptClients()
+{
+    while (running)
     {
         sockaddr_in clientAddr;
-        socklen_t clientAddrLen = sizeof(clientAddr);
+        socklen_t clientAddrLen = sizeof(ClientAddr);
+        
+        int clientSocket = accept(serverSocket, (struct sockaddr*) &clientAddr, &clientAddrLen);
 
-        int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, &clientAddrLen);
         if (clientSocket < 0)
         {
-            std::cerr << "Failed to accept connection!" << std::endl;
+            std::cerr << "Failed to accept connection\n"; 
             continue;
         }
 
-        std::cout << "New client connected: " << clientSocket << std::endl;
+        std::cout << "New client connected: "<< clientSocket<< std::endl;
         clientSockets.push_back(clientSocket);
 
-        clientHandlers.emplace_back(std::make_unique<ClientHandler>(clientSocket, commandProcessorAdapter));
-        clientThreads.emplace_back(&ClientHandler::handleClient, clientHandlers.back().get());
+        auto processor = iClientDataProcessor.createProcessor();
 
+        clientHandlers.emplace_back(std::unique_ptr<ClientHandler>(clientSocket, std::move(processor)))
+        clientThreads.emplace_back(&ClientHandler::handleClient, clientHandler.back().get());
     }
 }
 
@@ -97,7 +103,8 @@ void TCPServer::closeServer()
 
     for (std::thread& t : clientThreads)
     {
-        if (t.joinable()) {
+        if (t.joinable())
+        {
             t.join();
         }
     }
@@ -105,6 +112,7 @@ void TCPServer::closeServer()
     if (serverSocket >= 0)
     {
         close(serverSocket);
+        serverSocket = -1;
     }
 }
 
