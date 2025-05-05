@@ -19,5 +19,5 @@ class IClientDataProcessor
 {
 public:
     virtual ~IClientDataProcessor() = default;
-    virtual void processData(const rapidjson::Document& jsonDoc) = 0;
+    virtual std::string processCommand(const rapidjson::Document& jsonDoc) = 0;
 };

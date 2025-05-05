@@ -67,12 +67,13 @@ void TCPServer::stop()
 }
 
 
+
 void TCPServer::acceptClients()
 {
     while (running)
     {
         sockaddr_in clientAddr;
-        socklen_t clientAddrLen = sizeof(ClientAddr);
+        socklen_t clientAddrLen = sizeof(clientAddr);
         
         int clientSocket = accept(serverSocket, (struct sockaddr*) &clientAddr, &clientAddrLen);
 
@@ -82,15 +83,17 @@ void TCPServer::acceptClients()
             continue;
         }
 
-        std::cout << "New client connected: "<< clientSocket<< std::endl;
+        std::cout << "New client connected: " << clientSocket << std::endl;
         clientSockets.push_back(clientSocket);
 
-        auto processor = iClientDataProcessor.createProcessor();
+        auto processor = iClientDataProcessorFactory.createProcessor();
 
-        clientHandlers.emplace_back(std::unique_ptr<ClientHandler>(clientSocket, std::move(processor)))
-        clientThreads.emplace_back(&ClientHandler::handleClient, clientHandler.back().get());
+        clientHandlers.emplace_back(std::make_unique<ClientHandler>(clientSocket, std::move(processor)));
+        clientThreads.emplace_back(&ClientHandler::handleClient, clientHandlers.back().get());
     }
 }
+
+
 
 
 void TCPServer::closeServer()

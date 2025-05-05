@@ -57,7 +57,7 @@ private:
     std::vector<std::thread> clientThreads;  // Manages client handling threads
     std::vector<std::unique_ptr<ClientHandler>> clientHandlers;  // Manages ClientHandler instances
     
-    IClientDataProcessorFactory iClientDataProcessorFactory;
+    IClientDataProcessorFactory& iClientDataProcessorFactory;
 
 private:
     void acceptClients();

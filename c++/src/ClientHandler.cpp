@@ -22,8 +22,8 @@
 
 using namespace rapidjson;
 
-ClientHandler::ClientHandler(int socket, IClientDataProcessor& iClientDataProcessor) 
-    : clientSocket(socket), clientDataProcessor(iClientDataProcessor)
+ClientHandler::ClientHandler(int socket, std::unique_ptr<IClientDataProcessor> processor) 
+    : clientSocket(socket), processor(std::move(processor))
     {}
 
 
@@ -45,14 +45,17 @@ void ClientHandler::handleClient()
         std::string receivedData(buffer, bytesReceived);
         
         Document document;
+        document.Parse(receivedData.c_str());
+
         if (document.HasParseError())
         {
             std::cerr << "Failed to parse incoming JSON \n";
             continue;
         }
 
-        std::string response = clientDataProcessor.processData(document);
-
+        std::string response = processor->processCommand(document);
+        
+        
         if (send(clientSocket, response.c_str(), response.size(), 0) == -1)
         {
             std::cerr << "Failed to send response to the client \n";

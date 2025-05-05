@@ -15,5 +15,5 @@ CommandProcessorAdapterFactory::CommandProcessorAdapterFactory(CommandProcessor&
 
 std::unique_ptr<IClientDataProcessor> CommandProcessorAdapterFactory::createProcessor()
 {
-    return std::make_unique<CommandProcessorAdapter>(commandProcessor);
+    return std::make_unique<CommandProcessAdapter>(commandProcessor);
 }

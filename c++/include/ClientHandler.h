@@ -15,13 +15,12 @@
 class ClientHandler 
 {
 public:
-
-    ClientHandler(int socket, IClientDataProcessor& processor);
+    ClientHandler(int socket, std::unique_ptr<IClientDataProcessor> processor);
     void handleClient();  
 
+
 private:
-    
-int clientSocket;
-IClientDataProcessor& clientDataProcessor;
+    int clientSocket;
+    std::unique_ptr<IClientDataProcessor> processor;
 
 };
