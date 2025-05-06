@@ -23,6 +23,17 @@ bool JSONProcessor::parse(const std::string& inputJson, const rapidjson::Documen
 }
 
 
-
-
 // Implementing the build methods 
+
+std::string JSONProcessor::buildHelloMessage()
+{
+    rapidjson::Document document;
+    document.SetObject();
+    auto& allocator = document.GetAllocator();
+
+
+    document.AddMember("status", "success", allocator);
+    document.AddMember("message", "Welcome to the C++ server", allocator);
+
+    return serialize(document);
+}
