@@ -37,3 +37,17 @@ std::string JSONProcessor::buildHelloMessage()
 
     return serialize(document);
 }
+
+std::string JSONProcessor::buildError(const std::string& errorMessage)
+{
+    rapidjson::Document document;
+    document.setObject();
+    auto& allocator = document.GetAllocator();
+
+    document.AddMember("status", "error", allocator);
+    document.AddMember("message", rapidjson::Value(errorMessage.c_str(), allocator), allocator);
+
+    return serialize(document);
+}
+
+
