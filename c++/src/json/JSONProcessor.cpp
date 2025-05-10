@@ -38,6 +38,23 @@ std::string JSONProcessor::buildHelloMessage()
     return serialize(document);
 }
 
+
+
+std::string JSONProcessor::buildResponse(const std::string& response)
+{
+    rapidjson::Document document;
+    document.SetObject();
+    auto& allocator = document.GetAllocator();
+
+    document.AddMember("status", "success", allocator);
+    document.AddMember("response", rapidjson::Value(response.c_str(), allocator), allocator);
+
+    return serialize(document);
+}
+
+
+
+
 std::string JSONProcessor::buildError(const std::string& errorMessage)
 {
     rapidjson::Document document;
@@ -51,3 +68,14 @@ std::string JSONProcessor::buildError(const std::string& errorMessage)
 }
 
 
+
+std::string JSONProcessor::serialize(const rapidjson::Document& document)
+{
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+
+    document.Accept(writer);
+
+    return buffer.GetString();
+    
+}
