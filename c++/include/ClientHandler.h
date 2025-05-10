@@ -8,19 +8,21 @@
 #include <sys/socket.h>
 #include <rapidjson/document.h>
 
-#include "IClientDataProcessor.h"
+#include "JSONProcessor.h"
+#include "CommandProcessor.h"
 
 
 
 class ClientHandler 
 {
 public:
-    ClientHandler(int socket, std::unique_ptr<IClientDataProcessor> processor);
+    ClientHandler(int socket, CommandProcessor& commandProcessor);
     void handleClient();  
 
 
 private:
     int clientSocket;
-    std::unique_ptr<IClientDataProcessor> processor;
+    CommandProcessor& commandProcessor;
+    JSONProcessor jsonProcessor;
 
 };

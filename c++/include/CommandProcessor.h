@@ -35,7 +35,7 @@ class CommandProcessor {
 
 public:
     
-    CommandProcessor(MQTTPublisher& mqttPublisher);
+     CommandProcessor(MQTTPublisher* mqttPublisher = nullptr);
      std::string processCommand(const rapidjson::Document& jsonDoc);
 
 
@@ -53,9 +53,8 @@ private:
     // Command handlers
     std::string handlTurnLED();
     std::string handleStatusRequest();
-
     std::string handleDisconnect();
     
-    MQTTPublisher& mqttPublisher;
+    MQTTPublisher* mqttPublisher;
 
 };

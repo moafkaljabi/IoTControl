@@ -29,18 +29,14 @@ should be modular, so it can be replaced/work along a Http server, WebSockets an
 #include <memory>
 
 #include "ClientHandler.h"
-#include "IClientDataProcessorFactory.h"
-
 #include "CommandProcessor.h"
-#include "CommandProcessorAdapter.h"
-
 
 
 
 class TCPServer 
 {
 public:
-    TCPServer(int port, IClientDataProcessorFactory& iClientDataProcessorFactory);
+    TCPServer(int port, MQTTPublisher* mqttPublisher = nullptr);
     ~TCPServer();
 
     void start();
@@ -53,11 +49,9 @@ private:
     bool running;
     sockaddr_in sockAddr;
     
-    std::vector<int> clientSockets;
     std::vector<std::thread> clientThreads;  // Manages client handling threads
     std::vector<std::unique_ptr<ClientHandler>> clientHandlers;  // Manages ClientHandler instances
     
-    IClientDataProcessorFactory& iClientDataProcessorFactory;
 
 private:
     void acceptClients();
