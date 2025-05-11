@@ -1,0 +1,45 @@
++-------------------+
+|    TCPServer      |
++-------------------+
+| - clientHandlers  |
+| - jsonProcessor   |
+| - cmdProcessor    |
++-------------------+
+| + start()         |
+| + stop()          |
++-------------------+
+        |
+        | uses
+        v
++-------------------+
+|  ClientHandler    |
++-------------------+
+| - jsonProcessor   |
+| - cmdProcessor    |
++-------------------+
+| + handleClient()  |
++-------------------+
+
++-------------------+        +---------------------+
+|  JSONProcessor    |<-------|    MQTTPublisher     |
++-------------------+        +---------------------+
+| + parse(jsonStr)  |        | - jsonProcessor     |
+| + toJSON(object)  |        | - (optional) cmdProc|
++-------------------+        | + publish(topic, msg)|
+                             +---------------------+
+
++-------------------+
+| CommandProcessor  |
++-------------------+
+| + turnLED()       |
+| + restartDevice() |
+| + ...             |
++-------------------+
+
+Usage Summary:
+-------------
+- TCPServer uses: ClientHandler, JSONProcessor, CommandProcessor
+- ClientHandler uses: JSONProcessor, CommandProcessor
+- MQTTPublisher uses: JSONProcessor (and optionally CommandProcessor)
+- JSONProcessor: stateless utility, used by all others
+- CommandProcessor: shared command logic, used by TCP and (optionally) MQTT

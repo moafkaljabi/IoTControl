@@ -36,7 +36,7 @@ should be modular, so it can be replaced/work along a Http server, WebSockets an
 class TCPServer 
 {
 public:
-    TCPServer(int port, MQTTPublisher* mqttPublisher = nullptr);
+    TCPServer(int port);
     ~TCPServer();
 
     void start();
@@ -47,8 +47,12 @@ private:
     int serverSocket;
     int port;
     bool running;
-    sockaddr_in sockAddr;
     
+    sockaddr_in sockAddr;
+
+    CommandProcessor commandProcessor;
+
+    std::vector<int>clientSockets;
     std::vector<std::thread> clientThreads;  // Manages client handling threads
     std::vector<std::unique_ptr<ClientHandler>> clientHandlers;  // Manages ClientHandler instances
     

@@ -4,25 +4,21 @@
 
 TCP Server 
 
-Responsible for implemnting the methods in the socket.h API
-
+Responsible for implementing the methods in the socket.h API
 
 - Listens for incoming client connections from devices.
 - Spawns a new ClientHandler for each new connection.
-
-should be modular, so it can be replaced/work along a Http server, WebSockets and etc.
+- Forwards MQTT publisher to each handler.
 
 
 */
 
 #include "TCPServer.h"
 
-
-TCPServer::TCPServer(int port, IClientDataProcessorFactory& iClientDataProcessorFactory) 
-    : port(port), iClientDataProcessorFactory(iClientDataProcessorFactory), running(false), serverSocket(-1)
+TCPServer::TCPServer(int port)
+    : port(port), running(false), serverSocket(-1)
 {
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
-    
     if (serverSocket < 0)
     {
         throw std::runtime_error("Failed to create server socket!");
@@ -86,10 +82,10 @@ void TCPServer::acceptClients()
         std::cout << "New client connected: " << clientSocket << std::endl;
         clientSockets.push_back(clientSocket);
 
-        auto processor = iClientDataProcessorFactory.createProcessor();
 
-        clientHandlers.emplace_back(std::make_unique<ClientHandler>(clientSocket, std::move(processor)));
-        clientThreads.emplace_back(&ClientHandler::handleClient, clientHandlers.back().get());
+        auto handler = std::make_unique<ClientHandler>(clientSocket, commandProcessor);
+        clientThreads.emplace_back(&ClientHandler::handleClient, handler.get());
+        clientHandlers.push_back(st::move(handler));
     }
 }
 
