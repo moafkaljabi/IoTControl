@@ -9,7 +9,6 @@
     - Passing it to JSONReceiver.
     - Sending JSON using JSONSender.
 
-    - Forwarding to MqttPublisher.
 
 - Modular: should not depend directly on TCPServer.
 
@@ -22,9 +21,8 @@
 
 using namespace rapidjson;
 
-ClientHandler::ClientHandler(int socket, std::unique_ptr<IClientDataProcessor> processor) 
-    : clientSocket(socket), processor(std::move(processor))
-    {}
+ClientHandler::ClientHandler(int socket, CommandProcessor& commandProcessor) 
+    : clientSocket(socket), commandProcessor(commandProcessor){}
 
 
 void ClientHandler::handleClient()

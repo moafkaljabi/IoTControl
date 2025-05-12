@@ -12,8 +12,13 @@
 #include "CommandProcessor.h"
 #include "MQTTPublisher.h"
 
-CommandProcessor::CommandProcessor(MQTTPublisher& mqttPublisher)
+
+
+
+CommandProcessor::CommandProcessor(MQTTPublisher* mqttPublisher)
     : mqttPublisher(mqttPublisher) {}
+
+
 
 std::string CommandProcessor::processCommand(const rapidjson::Document& jsonDoc)
 {
@@ -40,41 +45,32 @@ std::string CommandProcessor::processCommand(const rapidjson::Document& jsonDoc)
 
 CommandProcessor::CommandType CommandProcessor::getCommandType(const std::string& command)
 {
-    if (command == "turn_led")
-    {
-        return CommandType::TURN_LED;
-    }
-
-    else if (command == "get_status")
-    {
-        return CommandType::GET_STATUS;
-    }
-
-    else if (command == "disconnect")
-    {
-        return CommandType::DISCONNECT;
-    }
-
-    else return CommandType::UNKNOWN;
+    if (command == "turn_led") return CommandType::TURN_LED;
+    if (command == "get_status") return CommandType::GET_STATUS;
+    if (command == "disconnect") return CommandType::DISCONNECT;
+    return CommandType::UNKNOWN;
 }
 
-std::string CommandProcessor::handlTurnLED()
+
+std::string CommandProcessor::handleTurnLED()
 {
     std::cout << "[Command] Turning LED on/off\n";
-    mqttPublisher.publish("device/led", R"({"status":"LED toggled"})");
-
-
+    if (mqttPublisher) {
+        mqttPublisher->publish(TOPIC_LED, R"({"status":"LED toggled"})");
+    } else {
+        std::cerr << "[Warning] MQTT publisher not available\n";
+    }
     return "LED toggled\n";
 }
 
 std::string CommandProcessor::handleStatusRequest()
 {
-    std::cout << "[Command] Getting the status\n"; 
-    return "Status: \n";
+    std::cout << "[Command] Getting the status\n";
+    return "Status: All systems nominal\n";
 }
 
 std::string CommandProcessor::handleDisconnect()
 {
     std::cout << "[Command] Disconnect requested\n";
-    return "Disconnected, Goodbey";
+    return "Disconnected. Goodbye.";
 }

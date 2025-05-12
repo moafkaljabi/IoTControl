@@ -21,7 +21,7 @@ class JSONProcessor {
 
 public:
     // Parse JSON
-    bool parse(const std::string& inputJson, const rapidjson::Document& outputDocument);
+    bool parse(const std::string& inputJson, rapidjson::Document& outputDocument);
 
     // Build the messages
     std::string buildHelloMessage();

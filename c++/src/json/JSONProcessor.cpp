@@ -9,17 +9,22 @@ JSONProcessor.cpp
 
 #include "JSONProcessor.h"
 
+
+
 bool JSONProcessor::parse(const std::string& inputJson, const rapidjson::Document& outputDocument)
 {
-    if(outputDocument.Parse(inputJson.c_str()).HasParseError())
-    {
-        std::cerr << "JSON parsing failed: " << rapidjson::GetParseErrorFunc(outputDocument.GetParseError()) << std::endl;
+    
+    outputDocument.Parse(inputJson.c_str());
+
+    if (outputDocument.HasParseError()) {
+        std::cerr << "JSON parsing failed: "
+                  << rapidjson::GetParseError_En(outputDocument.GetParseError())
+                  << " at offset "
+                  << outputDocument.GetErrorOffset()
+                  << std::endl;
         return false;
     }
-    elae 
-    {
-        return true;
-    }
+    return true;
 }
 
 
@@ -73,7 +78,6 @@ std::string JSONProcessor::serialize(const rapidjson::Document& document)
 {
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-
     document.Accept(writer);
 
     return buffer.GetString();
