@@ -21,8 +21,7 @@ mqtt/MQTTPublisher.cpp
 
 
 
-#include "../../include/Mqtt/MQTTPublisher.h"
-#include <iostream>
+#include "MQTTPublisher.h"
 
 
 
@@ -35,23 +34,33 @@ MQTTPublisher::MQTTPublisher
     : topic(topic), client(address, clientId), connOpts() 
 {
     connOpts.set_clean_session(true);
-    try {
-        client.connect(connOpts)->wait();
-        std::cout << "[MQTT] Connected to broker: " << address << std::endl;
-    } catch (const mqtt::exception& e) {
-        std::cerr << "[MQTT] Connection failed: " << e.what() << std::endl;
-    }
+    connect();
 }
+    
+void MQTTPublisher::connect()
+{
+        try {
+            client.connect(connOpts)->wait();
+            std::cout << "[MQTT] Connected to broker\n";
+        }
+        catch (const mqtt::exception& e) {
+            std::cerr << "[MQTT] Connection failed: " << e.what() << std::endl;
+        }
+    }
+
 
 void MQTTPublisher::publish(const std::string& topic, const std::string& payload)
 {
     try {
         client.publish(topic, payload.c_str(), payload.length(), 1, false);
-        std::cout << "[MQTT] Published to topic '" << topic << "': " << payload << std::endl;
-    } catch (const mqtt::exception& e) {
-        std::cerr << "[MQTT] Publish failed: " << e.what() << std::endl;
+        std::cout << "[MQTT] Published to '" << topic << "': " << payload << std::endl;
+    }
+    catch (const mqtt::exception& e) {
+        std::cerr << "[MQTT] Publish failed: " << e.what() << " — attempting reconnect...\n";
+        connect();
     }
 }
+
 
 
 
@@ -61,12 +70,15 @@ void MQTTPublisher::publishDefault(const std::string& payload)
 }
 
 
+
 MQTTPublisher::~MQTTPublisher()
 {
     try {
-        client.disconnect();
+        if (client.is_connected())
+            client.disconnect()->wait();
+        std::cout << "[MQTT] Disconnected cleanly\n";
     }
-    catch (...) {
-        std::cerr << "[MQTT] Error during disconnect\n";
+    catch (const mqtt::exception& e) {
+        std::cerr << "[MQTT] Disconnect failed: " << e.what() << std::endl;
     }
 }

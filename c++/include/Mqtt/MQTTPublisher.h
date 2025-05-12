@@ -35,4 +35,6 @@ private:
     std::string topic;
     mqtt::async_client client;
     mqtt::connect_options connOpts;
+
+    void connect();
 };
