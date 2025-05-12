@@ -1,19 +1,11 @@
-/*
-
-2025
-
-JSONProcessor.cpp
-
-*/
-
-
 #include "JSONProcessor.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/error/en.h"
+#include <iostream>
 
-
-
-bool JSONProcessor::parse(const std::string& inputJson, const rapidjson::Document& outputDocument)
+bool JSONProcessor::parse(const std::string& inputJson, rapidjson::Document& outputDocument)
 {
-    
     outputDocument.Parse(inputJson.c_str());
 
     if (outputDocument.HasParseError()) {
@@ -27,23 +19,17 @@ bool JSONProcessor::parse(const std::string& inputJson, const rapidjson::Documen
     return true;
 }
 
-
-// Implementing the build methods 
-
 std::string JSONProcessor::buildHelloMessage()
 {
     rapidjson::Document document;
     document.SetObject();
     auto& allocator = document.GetAllocator();
 
-
     document.AddMember("status", "success", allocator);
     document.AddMember("message", "Welcome to the C++ server", allocator);
 
     return serialize(document);
 }
-
-
 
 std::string JSONProcessor::buildResponse(const std::string& response)
 {
@@ -57,13 +43,10 @@ std::string JSONProcessor::buildResponse(const std::string& response)
     return serialize(document);
 }
 
-
-
-
 std::string JSONProcessor::buildError(const std::string& errorMessage)
 {
     rapidjson::Document document;
-    document.setObject();
+    document.SetObject();
     auto& allocator = document.GetAllocator();
 
     document.AddMember("status", "error", allocator);
@@ -72,14 +55,10 @@ std::string JSONProcessor::buildError(const std::string& errorMessage)
     return serialize(document);
 }
 
-
-
 std::string JSONProcessor::serialize(const rapidjson::Document& document)
 {
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
     document.Accept(writer);
-
     return buffer.GetString();
-    
 }

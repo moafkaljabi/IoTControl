@@ -1,40 +1,25 @@
-/*
-
-mqtt/MQTTPublisher.h
-
-*/
-
-
-
 #pragma once
 
-
 #include <string>
-#include <memory>
 #include <mqtt/async_client.h>
 
 class MQTTPublisher {
-
 public:
-    
-    MQTTPublisher
-    (
+    MQTTPublisher(
         const std::string& address,
         const std::string& clientId,
-        const std::string& topic
+        const std::string& defaultTopic
     );
-    
-    void publish(const std::string& topic , const std::string& payload);
-    void publishDefault(const std::string& payload);
 
+    void publish(const std::string& topic, const std::string& payload);
+    void publishDefault(const std::string& payload);
 
     ~MQTTPublisher();
 
 private:
-    
     std::string topic;
     mqtt::async_client client;
     mqtt::connect_options connOpts;
 
-    void connect();
+    void connect();  // Internal retry logic
 };

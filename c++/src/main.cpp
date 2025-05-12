@@ -12,7 +12,9 @@ int main()
         const std::string defaultTopic = "device/status";
 
         MQTTPublisher mqttPublisher(mqttAddress, mqttClientId, defaultTopic);
-        TCPServer server(8080, &mqttPublisher);
+        //TCPServer server(8080, &mqttPublisher);
+        TCPServer server(8080);
+
         server.start();
     }
     catch (const std::exception& ex)

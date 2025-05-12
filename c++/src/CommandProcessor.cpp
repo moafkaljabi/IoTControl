@@ -1,31 +1,14 @@
-/*
-
-2025
-
-
-
-
-*/
-
-
-
 #include "CommandProcessor.h"
 #include "MQTTPublisher.h"
-
-
-
+#include <iostream>
 
 CommandProcessor::CommandProcessor(MQTTPublisher* mqttPublisher)
     : mqttPublisher(mqttPublisher) {}
 
-
-
 std::string CommandProcessor::processCommand(const rapidjson::Document& jsonDoc)
 {
-    // Check if the command is proper
-    if (!jsonDoc.HasMember("command") || !jsonDoc["command"].IsString())
-    {
-        return "Invalid commanf format...";
+    if (!jsonDoc.HasMember("command") || !jsonDoc["command"].IsString()) {
+        return "Invalid command format.";
     }
 
     std::string command = jsonDoc["command"].GetString();
@@ -33,13 +16,13 @@ std::string CommandProcessor::processCommand(const rapidjson::Document& jsonDoc)
 
     switch (commandType) {
         case CommandType::TURN_LED:
-            return handlTurnLED();
+            return handleTurnLED();
         case CommandType::GET_STATUS:
             return handleStatusRequest();
         case CommandType::DISCONNECT:
             return handleDisconnect();
         default:
-            return "Unknown command " + command;
+            return "Unknown command: " + command;
     }
 }
 
@@ -50,7 +33,6 @@ CommandProcessor::CommandType CommandProcessor::getCommandType(const std::string
     if (command == "disconnect") return CommandType::DISCONNECT;
     return CommandType::UNKNOWN;
 }
-
 
 std::string CommandProcessor::handleTurnLED()
 {

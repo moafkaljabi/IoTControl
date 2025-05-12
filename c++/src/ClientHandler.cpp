@@ -51,7 +51,7 @@ void ClientHandler::handleClient()
             continue;
         }
 
-        std::string response = processor->processCommand(document);
+        std::string response = commandProcessor.processCommand(document);
         
         
         if (send(clientSocket, response.c_str(), response.size(), 0) == -1)

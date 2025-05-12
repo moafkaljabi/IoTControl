@@ -1,53 +1,29 @@
-/*
+#include "../../include/Mqtt/MQTTPublisher.h"
+#include <iostream>
 
-
-mqtt/MQTTPublisher.cpp
-
-
-2025
-
-- Published parsed data to to MQTT.
-
-- Called by ClientHandler to publish messages.
-
-- Should not know about TCP or sockets.
-
-- Sends data to a topic.
-
-- Uses MqttClient to do the actual communication.
-
-
-*/ 
-
-
-
-#include "MQTTPublisher.h"
-
-
-
-MQTTPublisher::MQTTPublisher
-(
-    const std::string& address, 
-    const std::string& clientId, 
-    const std::string& topic
+MQTTPublisher::MQTTPublisher(
+    const std::string& address,
+    const std::string& clientId,
+    const std::string& defaultTopic
 )
-    : topic(topic), client(address, clientId), connOpts() 
+    : topic(defaultTopic),
+      client(address, clientId),
+      connOpts()
 {
     connOpts.set_clean_session(true);
     connect();
 }
-    
+
 void MQTTPublisher::connect()
 {
-        try {
-            client.connect(connOpts)->wait();
-            std::cout << "[MQTT] Connected to broker\n";
-        }
-        catch (const mqtt::exception& e) {
-            std::cerr << "[MQTT] Connection failed: " << e.what() << std::endl;
-        }
+    try {
+        client.connect(connOpts)->wait();
+        std::cout << "[MQTT] Connected to broker\n";
     }
-
+    catch (const mqtt::exception& e) {
+        std::cerr << "[MQTT] Connection failed: " << e.what() << std::endl;
+    }
+}
 
 void MQTTPublisher::publish(const std::string& topic, const std::string& payload)
 {
@@ -61,15 +37,10 @@ void MQTTPublisher::publish(const std::string& topic, const std::string& payload
     }
 }
 
-
-
-
 void MQTTPublisher::publishDefault(const std::string& payload)
 {
     publish(topic, payload);
 }
-
-
 
 MQTTPublisher::~MQTTPublisher()
 {
