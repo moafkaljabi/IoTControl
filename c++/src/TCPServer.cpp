@@ -1,7 +1,7 @@
 #include "TCPServer.h"
 
-TCPServer::TCPServer(int port)
-    : port(port), running(false), serverSocket(-1)
+TCPServer::TCPServer(int port, MQTTPublisher* mqttPublisher)
+    : port(port), running(false), mqttPublisher(mqttPublisher), serverSocket(-1)
 {
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket < 0)
@@ -47,7 +47,7 @@ void TCPServer::acceptClients() {
         std::cout << "New client connected: " << clientSocket << std::endl;
         clientSockets.push_back(clientSocket);
 
-        auto handler = std::make_unique<ClientHandler>(clientSocket, commandProcessor);
+        auto handler = std::make_unique<ClientHandler>(clientSocket, commandProcessor, mqttPublisher);
         clientThreads.emplace_back(&ClientHandler::handleClient, handler.get());
         clientHandlers.push_back(std::move(handler));
     }

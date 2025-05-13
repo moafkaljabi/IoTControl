@@ -18,11 +18,12 @@
 
 
 #include "ClientHandler.h"
+#include "MQTTPublisher.h"
 
 using namespace rapidjson;
 
-ClientHandler::ClientHandler(int socket, CommandProcessor& commandProcessor) 
-    : clientSocket(socket), commandProcessor(commandProcessor){}
+ClientHandler::ClientHandler(int socket, CommandProcessor& commandProcessor, MQTTPublisher* mqttPublisher) 
+    : clientSocket(socket), commandProcessor(commandProcessor), mqttPublisher(mqttPublisher){}
 
 
 void ClientHandler::handleClient()
@@ -52,6 +53,12 @@ void ClientHandler::handleClient()
         }
 
         std::string response = commandProcessor.processCommand(document);
+
+        // To send MQTT
+        if (mqttPublisher)
+        {
+            mqttPublisher->publish("device/status", response);
+        }
         
         
         if (send(clientSocket, response.c_str(), response.size(), 0) == -1)

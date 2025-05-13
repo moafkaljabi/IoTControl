@@ -4,7 +4,7 @@
 #include <string>
 #include <mqtt/async_client.h>
 
-class MQTTClient {
+class MyMQTTClient {
 public:
     MQTTClient(const std::string& brokerURI, const std::string& clientId);
     bool connect();

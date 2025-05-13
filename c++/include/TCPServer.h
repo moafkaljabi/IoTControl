@@ -13,7 +13,7 @@
 class TCPServer 
 {
 public:
-    TCPServer(int port);
+    TCPServer(int port, MQTTPublisher* mqttPublisher);
     ~TCPServer();
 
     void start();
@@ -27,6 +27,8 @@ private:
     sockaddr_in sockAddr;
 
     CommandProcessor commandProcessor;
+
+    MQTTPublisher* mqttPublisher = nullptr;
 
     std::vector<int> clientSockets;
     std::vector<std::thread> clientThreads;

@@ -16,7 +16,7 @@
 class ClientHandler 
 {
 public:
-    ClientHandler(int socket, CommandProcessor& commandProcessor);
+    ClientHandler(int socket, CommandProcessor& commandProcessor, MQTTPublisher* mqttPublisher);
     void handleClient();  
 
 
@@ -24,5 +24,7 @@ private:
     int clientSocket;
     CommandProcessor& commandProcessor;
     JSONProcessor jsonProcessor;
+    MQTTPublisher* mqttPublisher;
+
 
 };
