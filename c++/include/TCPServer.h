@@ -3,29 +3,37 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include <cstring>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <memory>
 
 #include "ClientHandler.h"
+#include "CommandProcessor.h"
 
 class TCPServer 
 {
 public:
-    TCPServer(int port);
+    TCPServer(int port, MQTTPublisher* mqttPublisher);
     ~TCPServer();
+
     void start();
+    void stop();    
 
 private:
     int serverSocket;
     int port;
+    bool running;
+
     sockaddr_in sockAddr;
-    
-    std::vector<int> clientSockets;  // Tracks connected client sockets
-    std::vector<std::thread> clientThreads;  // Manages client handling threads
-    std::vector<std::unique_ptr<ClientHandler>> clientHandlers;  // Manages ClientHandler instances
 
+    CommandProcessor commandProcessor;
 
-  
+    MQTTPublisher* mqttPublisher = nullptr;
+
+    std::vector<int> clientSockets;
+    std::vector<std::thread> clientThreads;
+    std::vector<std::unique_ptr<ClientHandler>> clientHandlers;
+
+    void acceptClients();
     void closeServer();
 };

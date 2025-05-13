@@ -1,44 +1,17 @@
-/*
+#pragma once
 
-2025
-
-This class is to process commands after receiving them from the JSONReceiver class.
-
-
-
-[TCPServer]
-     ↓
-[ClientHandler] ← receives string over socket
-     ↓
-[JSONReceiver] ← parses it into JSON object
-     ↓
-[CommandProcessor] ← interprets & runs actions based on command
-     ↓
-[JSONSender] ← sends result/status response back
-
-
-
-*/
-
-
-#pragma once 
-#include <iostream>
 #include <string>
 #include "rapidjson/document.h"
 
+class MQTTPublisher;
 
 class CommandProcessor {
-
 public:
-    
-    CommandProcessor();
-
+    explicit CommandProcessor(MQTTPublisher* mqttPublisher = nullptr);
     std::string processCommand(const rapidjson::Document& jsonDoc);
 
-
 private:
-
-    enum class CommandType{
+    enum class CommandType {
         TURN_LED,
         GET_STATUS,
         DISCONNECT,
@@ -47,12 +20,11 @@ private:
 
     CommandType getCommandType(const std::string& command);
 
-    // Command handlers
-    std::string handlTurnLED();
+    std::string handleTurnLED();
     std::string handleStatusRequest();
-
     std::string handleDisconnect();
-    
 
+    MQTTPublisher* mqttPublisher;
 
+    static constexpr const char* TOPIC_LED = "device/led";
 };

@@ -4,24 +4,27 @@
 #include <unistd.h>
 #include <vector>
 #include <thread>
+#include <cstring>
+#include <sys/socket.h>
+#include <rapidjson/document.h>
 
-#include "json/JSONSender.h"
-#include "Mqtt/MQTTPublisher.h"
+#include "JSONProcessor.h"
+#include "CommandProcessor.h"
 
-class MQTTPublisher;
 
 
 class ClientHandler 
 {
 public:
-   
-    ClientHandler(int socket);  // Constructor to initialize jsonSender
-    void handleClient();  // Function to handle client communication
+    ClientHandler(int socket, CommandProcessor& commandProcessor, MQTTPublisher* mqttPublisher);
+    void handleClient();  
+
 
 private:
-    
-int clientSocket;
-    JSONSender jsonSender;  // JSONSender instance for sending responses
+    int clientSocket;
+    CommandProcessor& commandProcessor;
+    JSONProcessor jsonProcessor;
+    MQTTPublisher* mqttPublisher;
 
 
 };
