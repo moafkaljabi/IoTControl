@@ -3,6 +3,7 @@
 2025
 
 
+
 - Handles a single client's socket lifecycle.
 - Responsibele for: 
     - Reading raw JSON.
